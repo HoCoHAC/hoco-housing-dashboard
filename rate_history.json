@@ -1,0 +1,12 @@
+[
+  {
+    "checked": "2026-08-03",
+    "displayed_rate": 6.66,
+    "displayed_week": "July 30, 2026",
+    "observed_rate": 6.66,
+    "observed_week": "7/30/2026",
+    "gap": 0.0,
+    "threshold": 0.25,
+    "action": "hold"
+  }
+]
