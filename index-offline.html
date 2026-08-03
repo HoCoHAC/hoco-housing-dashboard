@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Housing Dashboard — Howard County Housing Affordability</title>
+<meta name="description" content="Howard County housing data on prices, what it takes to buy, the affordable rental gap, cost burden, and racial disparities — from the Housing Affordability Coalition.">
+<script src="chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #192744;
+    --navy-2: #22355c;
+    --coral: #e86c5a;
+    --coral-text: #c1462f;
+    --blue: #4a8bc2;
+    --blue-dark: #156082;
+    --gold: #d4a843;
+    --gold-text: #8a6a1f;
+    --green: #2f7d32;
+    --brand-green: #69b046;
+    --brand-green-dk: #4e8c31;
+    --pink-bg: #fce8e5;
+    --card: #ffffff;
+    --tile: #fafaf8;
+    --bg: #f4f5ef;
+    --border: #dcdcd8;
+    --text: #1f2733;
+    --muted: #5f6672;
+    --shadow: 0 1px 2px rgba(25,39,68,.05), 0 3px 10px rgba(25,39,68,.05);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--blue-dark); }
+  a:hover { text-decoration: underline; }
+  .tnum { font-variant-numeric: tabular-nums lining-nums; }
+
+  /* ---------- Header ---------- */
+  .site-header { background: #fff; border-bottom: 1px solid var(--border); }
+  .header-inner {
+    max-width: 1180px; margin: 0 auto; padding: 15px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .brand { display: block; min-width: 0; line-height: 0; }
+  .brand img { height: 58px; width: auto; max-width: 100%; display: block; }
+  .header-meta {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 7px;
+    text-align: right;
+  }
+  .header-title {
+    font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.005em;
+  }
+  .updated-badge {
+    background: #f1f5ed; border: 1px solid #cfe2c3;
+    color: var(--brand-green-dk); padding: 6px 13px; border-radius: 999px;
+    font-size: 12px; font-weight: 500; white-space: nowrap;
+  }
+  .updated-badge strong { font-weight: 700; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    background: var(--navy-2);
+    border-top: 3px solid var(--brand-green);
+    position: sticky; top: 0; z-index: 40;
+    box-shadow: 0 1px 6px rgba(0,0,0,.16);
+  }
+  .nav-inner {
+    max-width: 1180px; margin: 0 auto; padding: 0 14px;
+    display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-inner a {
+    color: #dbe2ee; padding: 12px 13px; font-size: 13.5px; font-weight: 500;
+    white-space: nowrap; text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .nav-inner a:hover {
+    color: #fff; text-decoration: none; border-bottom-color: var(--coral);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { max-width: 1180px; margin: 34px auto 4px; padding: 0 24px; }
+  .hero h2 {
+    font-size: 31px; line-height: 1.18; margin: 0 0 12px;
+    color: var(--navy); letter-spacing: -0.02em; font-weight: 700;
+  }
+  .hero p { max-width: 780px; font-size: 16.5px; color: var(--muted); margin: 0; }
+
+  /* ---------- Layout ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  .section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: var(--shadow);
+    padding: 26px 28px; margin: 22px 0; scroll-margin-top: 66px;
+  }
+  .section h2.section-title {
+    margin: 0 0 6px; font-size: 22px; color: var(--navy);
+    letter-spacing: -0.015em; font-weight: 700;
+  }
+  .section .section-sub { margin: 0 0 18px; color: var(--muted); font-size: 14.5px; }
+  .section h3 {
+    margin: 26px 0 4px; font-size: 16.5px; color: var(--navy); font-weight: 600;
+  }
+  .section h3:first-of-type { margin-top: 6px; }
+  .subcap { margin: 0 0 12px; color: var(--muted); font-size: 13.5px; }
+
+  /* ---------- Inner panel ---------- */
+  .panel {
+    background: var(--tile); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px; margin: 12px 0;
+  }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+
+  /* ---------- KPI tiles ---------- */
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin: 14px 0 4px;
+  }
+  .kpi {
+    background: var(--tile); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .kpi .label {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .07em;
+    font-weight: 700; color: var(--muted);
+  }
+  .kpi .value {
+    font-size: 27px; font-weight: 700; color: var(--navy);
+    margin-top: 6px; letter-spacing: -0.02em;
+  }
+  .kpi .sub { font-size: 12.5px; color: var(--muted); margin-top: 5px; }
+
+  /* ---------- Homebuying hero figures ---------- */
+  .buy-layout {
+    display: grid; grid-template-columns: minmax(240px, 0.85fr) minmax(320px, 1.15fr);
+    gap: 28px; align-items: start;
+  }
+  .figure-block { padding: 4px 0; }
+  .figure-block + .figure-block {
+    border-top: 1px solid var(--border); margin-top: 18px; padding-top: 18px;
+  }
+  .figure-label {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .07em;
+    font-weight: 700; color: var(--muted);
+  }
+  .figure-value {
+    font-size: 34px; font-weight: 700; color: var(--navy);
+    letter-spacing: -0.02em; line-height: 1.1; margin-top: 4px;
+  }
+  .figure-value.hero-num {
+    font-size: 52px; color: var(--coral-text); letter-spacing: -0.03em;
+  }
+  .figure-note { font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+  /* ---------- Cost table ---------- */
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .cost-table td {
+    padding: 11px 14px; background: var(--tile);
+    border-bottom: 3px solid #fff;
+  }
+  .cost-table td:last-child { text-align: right; font-weight: 500; }
+  .cost-table tr.total td {
+    background: var(--navy); color: #fff; font-weight: 700;
+    border-bottom: none;
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    border-left: 4px solid var(--coral); background: var(--pink-bg);
+    padding: 13px 16px; border-radius: 7px; color: #4a2b26;
+    font-size: 14px; margin: 14px 0; display: flex; gap: 11px;
+  }
+  .callout .ico { flex: 0 0 auto; color: var(--coral-text); line-height: 1.4; }
+  .callout.navy {
+    border-left-color: var(--navy); background: #eef1f6; color: #24303f;
+  }
+  .callout.navy .ico { color: var(--navy); }
+
+  /* ---------- Sources ---------- */
+  .sources {
+    margin-top: 18px; padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    font-size: 12.5px; color: var(--muted);
+  }
+  .sources strong { color: var(--text); font-weight: 600; }
+  .sources ol { margin: 6px 0 0; padding-left: 18px; }
+  .sources li { margin: 3px 0; }
+  .src-line { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+
+  /* ---------- Charts ---------- */
+  .chart-wrap { position: relative; height: 300px; margin: 6px 0 2px; }
+  .chart-wrap.sm { height: 250px; }
+  .chart-wrap.md { height: 330px; }
+  .chart-wrap.tall { height: 400px; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    font-size: 12.5px; color: var(--muted); margin: 4px 0 10px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { width: 11px; height: 11px; border-radius: 2px; flex: 0 0 11px; }
+  .sw.outline { background: #ececeb; border: 1.5px solid var(--navy); }
+
+  /* ---------- Methodology ---------- */
+  #mihu .cost-table td:last-child { white-space: nowrap; }
+  .meth-item { margin: 0 0 16px; }
+  .meth-item h4 {
+    margin: 0 0 3px; font-size: 14.5px; color: var(--navy); font-weight: 600;
+  }
+  .meth-item p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    background: var(--navy); color: #b9c3d6;
+    padding: 30px 24px; text-align: center; font-size: 13px; margin-top: 36px;
+  }
+  .site-footer a { color: #fff; }
+
+  @media (max-width: 760px) {
+    .buy-layout { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (max-width: 700px) {
+    .header-inner {
+      flex-direction: column; align-items: flex-start; gap: 13px; padding: 15px 20px;
+    }
+    .header-meta {
+      flex-direction: row; align-items: center; flex-wrap: wrap;
+      gap: 10px 14px; text-align: left;
+    }
+    .brand img { height: auto; width: 100%; max-width: 258px; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 15.5px; }
+    .hero h2 { font-size: 25px; }
+    .section { padding: 20px 18px; }
+    .kpi .value { font-size: 23px; }
+    .figure-value.hero-num { font-size: 40px; }
+    .header-title { font-size: 15px; }
+    .updated-badge { font-size: 11px; padding: 5px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <img src="logo-hac.png" width="702" height="160"
+           alt="Howard County Housing Affordability Coalition">
+    </div>
+    <div class="header-meta">
+      <h1 class="header-title">Housing Dashboard</h1>
+      <div class="updated-badge">Data as of <strong>August 3, 2026</strong></div>
+    </div>
+  </div>
+</header>
+
+  <nav class="nav" aria-label="Section navigation">
+    <div class="nav-inner">
+      <a href="#key-metrics">Key Metrics</a>
+      <a href="#homebuying">What It Takes to Buy</a>
+      <a href="#communities">By Community</a>
+      <a href="#rental-gap">Affordable Rental Gap</a>
+      <a href="#mihu">MIHU Program</a>
+      <a href="#cost-burden">Cost Burden</a>
+      <a href="#disparities">Disparities by Race &amp; Ethnicity</a>
+      <a href="#methodology">Methodology</a>
+    </div>
+  </nav>
+
+<section class="hero">
+  <h2>Howard County housing, in one place.</h2>
+  <p>Prices, what it takes to buy, the affordability gap, who carries the cost burden, and how that burden falls unevenly by race and ethnicity — the data our Coalition uses to make the case for more affordable homes.</p>
+</section>
+
+<main>
+
+  <!-- ============ KEY METRICS ============ -->
+  <section class="section" id="key-metrics">
+    <h2 class="section-title">Key Metrics at a Glance</h2>
+    <p class="section-sub">The median listing price for a Howard County home is <strong>$685,000</strong>, and a two-bedroom apartment runs <strong>$1,947&ndash;$3,069</strong> a month.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="label">For Sale: Median Listing Price</div>
+        <div class="value tnum">$685,000</div>
+        <div class="sub">$265 per square foot &middot; Realtor.com, August 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="label">For Rent: 2BR Monthly Range</div>
+        <div class="value tnum">$1,947&ndash;$3,069</div>
+        <div class="sub">HCHC payment standards, effective Jan 1, 2026</div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>Realtor.com, <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a> &mdash; median listing price and price per square foot, retrieved August 3, 2026.</li>
+        <li>Howard County Housing Commission, <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a> &mdash; effective January 1, 2026.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ HOMEBUYING ============ -->
+  <section class="section" id="homebuying">
+    <h2 class="section-title">What It Takes to Buy the Median-Priced Home</h2>
+    <p class="section-sub">A single 10% down-payment scenario, using the current median listing price and the latest Freddie Mac 30-year fixed rate.</p>
+
+    <div class="buy-layout">
+      <div>
+        <div class="figure-block">
+          <div class="figure-label">Down payment of 10%</div>
+          <div class="figure-value tnum">$68,500</div>
+        </div>
+        <div class="figure-block">
+          <div class="figure-label">Annual income required</div>
+          <div class="figure-value hero-num tnum">$213,150</div>
+          <p class="figure-note">to afford the median Howard County listed home &mdash; assuming 10% down, a 30-year fixed mortgage at 6.66%, PMI of ~0.55% on the loan, and housing costs at 28% of gross income.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap sm"><canvas id="chartBuyDonut" role="img" aria-label="Donut chart of monthly housing cost components: principal and interest $3,962, property tax $579, homeowners insurance $150, and PMI $283."></canvas></div>
+        <table class="cost-table tnum">
+          <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Monthly housing cost breakdown</caption>
+          <tbody>
+            <tr><td>Principal &amp; interest</td><td>$3,962</td></tr>
+            <tr><td>Property tax (1.014%)</td><td>$579</td></tr>
+            <tr><td>Homeowners insurance</td><td>$150</td></tr>
+            <tr><td>PMI (~0.55% of loan)</td><td>$283</td></tr>
+            <tr class="total"><td>Total monthly housing cost</td><td>$4,974</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Cash needed to close is roughly <strong>$89,050</strong> &mdash; a $68,500 down payment plus about $20,550 in closing costs (title, transfer, recordation, and lender fees at ~3% of price).</span>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span><strong>From the Comptroller of Maryland:</strong> Howard County is among the least affordable counties in Maryland for first-time homebuyers, with home prices well above the statewide median and monthly ownership costs among the highest in the state.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources &amp; assumptions</strong>
+      <ol>
+        <li>Home price: Realtor.com <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County median listing price</a>, $685,000 (retrieved August 3, 2026). Loan amount $616,500 after 10% down.</li>
+        <li>Rate: Freddie Mac <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">PMMS</a> 30-year fixed, 6.66% (week ending July 30, 2026), amortized over 360 months.</li>
+        <li>Property tax: 1.014% effective combined Howard County and State of Maryland rate, per <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">Howard County Department of Finance</a>.</li>
+        <li>Insurance: $150/month, typical Howard County estimate. PMI: ~0.55% of loan annually, required with less than 20% down.</li>
+        <li>Income required: total monthly housing cost at a 28% front-end debt-to-income ratio.</li>
+        <li>Affordability context: <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">Comptroller of Maryland</a>, Howard County affordability profile.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ BY COMMUNITY ============ -->
+  <section class="section" id="communities">
+    <h2 class="section-title">Prices &amp; Homeownership by Community</h2>
+    <p class="section-sub">Howard County is not one housing market. Prices and ownership rates vary sharply across its communities.</p>
+
+    <h3>Median Listing Prices by Community</h3>
+    <p class="subcap">Comparing prices across Howard County neighborhoods</p>
+    <div class="panel">
+      <div class="chart-wrap tall"><canvas id="chartCommPrice" role="img" aria-label="Horizontal bar chart of median listing price by Howard County community, compared with the countywide median."></canvas></div>
+      <p class="src-line" id="srcCommPrice"></p>
+    </div>
+
+    <h3>Homeownership Rate by Community</h3>
+    <p class="subcap">Share of occupied homes that are owner-occupied</p>
+    <div class="panel">
+      <div class="chart-wrap md"><canvas id="chartCommOwn" role="img" aria-label="Horizontal bar chart of homeownership rate by Howard County community, compared with the countywide average."></canvas></div>
+      <p class="src-line" id="srcCommOwn"></p>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol id="commSources"></ol>
+    </div>
+  </section>
+
+  <!-- ============ AFFORDABLE RENTAL GAP ============ -->
+  <section class="section" id="rental-gap">
+    <h2 class="section-title">Gap in Affordable Rental Housing by Income Level</h2>
+    <p class="section-sub">Is this housing market producing enough rental homes for each income band?<br>AMI = area median income</p>
+
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw outline" aria-hidden="true"></i> Households in this income band (demand)</span>
+        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> Rental homes affordable at this income level (supply)</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="chartGap" role="img" aria-label="Bullet chart comparing renter household demand with affordable rental supply across six income bands. Shortages of 2,872, 3,329 and 1,908 homes below 60 percent of area median income, surpluses of 5,076 and 7,225 in the moderate and high bands, and a shortage of 4,378 in the highest band."></canvas></div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Across the three bands below 60% AMI, <strong>12,627 renter households</strong> are chasing just <strong>4,518 affordable homes</strong> &mdash; a shortage of <strong>8,109 homes</strong>, or roughly one affordable home for every three households that need one. Above 60% AMI the picture reverses for the moderate- and high-rent bands, then flips back to a shortage for the highest-earning renters.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 64, &ldquo;Penetration Rate Analysis,&rdquo; page 93</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). Demand is the table's &ldquo;Estimated No. of Qualifying Renter Hhlds&rdquo;; supply is its &ldquo;Inventory Serving this Band.&rdquo; Total renter households countywide: 36,901. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
+        <li>The report publishes a penetration rate (supply &divide; demand), not a gap. The shortage and surplus figures shown here are supply minus demand, calculated from the table's own counts. The 12,627 / 4,518 / 8,109 sub-60% figures are the sum of the table's three lowest rows &mdash; the report's narrative gives slightly different totals in two places (4,479 units on page 92 and 4,519 in the executive summary), an inconsistency it does not reconcile.</li>
+        <li>A unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of household income, using HUD's 2023 median family income of $121,700 for the Baltimore-Columbia-Towson metro area. Units are classified <strong>by their rent level across the whole surveyed stock</strong> &mdash; not by whether an income-qualified household actually occupies them. The report notes the high-rent surplus means those units are &ldquo;serving renter households from other income bands.&rdquo;</li>
+        <li>Two limits the report states directly: the income bands overlap, because a band's floor is set by one-bedroom rents and its ceiling by three-bedroom rents, so a household can qualify for two bands depending on its size; and scattered-site rentals (10,300 of the 36,901 units) are modeled from a 13% sample rather than counted. The band inventory rows sum to 36,716 against a stated 36,901-unit universe, leaving 185 units unexplained.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ MIHU ============ -->
+  <section class="section" id="mihu">
+    <h2 class="section-title">Moderate Income Housing Unit (MIHU) Program</h2>
+    <p class="section-sub">Howard County's inclusionary zoning program. Developers in designated zoning districts must sell or rent a share of new units to moderate-income households at prices and rents the County sets &mdash; and those restrictions run in perpetuity.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="label">MIHU Home vs. Market</div>
+        <div class="value tnum">45% below</div>
+        <div class="sub">$348,017 average new MIHU townhome vs. $628,000 market median</div>
+      </div>
+      <div class="kpi">
+        <div class="label">MIHU Rent vs. Market</div>
+        <div class="value tnum">25% below</div>
+        <div class="sub">$1,488 average MIHU rent vs. $1,979 countywide market average</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Eligible Buyers Served</div>
+        <div class="value tnum">1 in 10</div>
+        <div class="sub">45 of 426 income-eligible applicants, calendar year 2024</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Rental MIHUs in Service</div>
+        <div class="value tnum">1,005</div>
+        <div class="sub">Across 30 rental communities, calendar year 2025</div>
+      </div>
+    </div>
+
+    <h3>How the Two Tracks Work</h3>
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0">For Homebuyers</h3>
+        <table class="cost-table tnum" style="font-size:13.5px">
+          <tbody>
+            <tr><td>Income limit</td><td>&le;80% AMI</td></tr>
+            <tr><td>Max income, family of four</td><td>$117,586</td></tr>
+            <tr><td>Average new MIHU townhome</td><td>$348,017</td></tr>
+            <tr><td>Average MIHU resale</td><td>$306,940</td></tr>
+            <tr><td>Affordability term</td><td>Perpetual</td></tr>
+          </tbody>
+        </table>
+        <p class="src-line">Prices are set twice yearly at what a household earning 70% of median can afford for a single-family or proffered home, 65% for a townhouse, and 50% for a condominium. On resale, the price may rise only by the change in consumer prices or median income, whichever is lower, capped at 3.5% a year. Enrollment opens quarterly and applications stay valid three years.</p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">For Renters</h3>
+        <table class="cost-table tnum" style="font-size:13.5px">
+          <tbody>
+            <tr><td>Income limit</td><td>&le;60% AMI</td></tr>
+            <tr><td>Max income, family of four</td><td>$88,189</td></tr>
+            <tr><td>Average MIHU rent</td><td>$1,488</td></tr>
+            <tr><td>Typical 2BR MIHU rent</td><td>$1,456&ndash;$1,507</td></tr>
+            <tr><td>Affordability term</td><td>Perpetual</td></tr>
+          </tbody>
+        </table>
+        <p class="src-line">Rents are capped at 30% of the monthly income of a household at 60% of median, and must include a utility allowance. There is no county waiting list &mdash; renters apply directly to a participating community on a first-come, first-served basis, and income is recertified each year at lease renewal.</p>
+      </div>
+    </div>
+
+    <h3>What MIHU Saves a Household</h3>
+    <div class="grid-2">
+      <div class="panel">
+        <p class="subcap" style="margin-top:0">Purchase price, MIHU vs. market</p>
+        <div class="chart-wrap sm"><canvas id="chartMihuPrice" role="img" aria-label="Bar chart comparing the average new MIHU townhome price of $348,017 with the countywide median sale price of $628,000."></canvas></div>
+      </div>
+      <div class="panel">
+        <p class="subcap" style="margin-top:0">Monthly rent, MIHU vs. market</p>
+        <div class="chart-wrap sm"><canvas id="chartMihuRent" role="img" aria-label="Bar chart comparing the average MIHU rent of $1,488 with the countywide average market rent of $1,979."></canvas></div>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>On both tracks the discount is real and deep. A MIHU townhome costs roughly <strong>$280,000 less</strong> than the county's median home, and a MIHU rent runs about <strong>$490 a month less</strong> than the countywide average &mdash; roughly <strong>$5,900 a year</strong> back in a renter's pocket.</span>
+    </div>
+
+    <h3>Who Actually Gets In</h3>
+    <p class="subcap">Income-eligible homebuyer applicants compared with homes actually awarded</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw outline" aria-hidden="true"></i> Income-eligible applicants</span>
+        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> Homes awarded</span>
+      </div>
+      <div class="chart-wrap sm"><canvas id="chartMihuAccess" role="img" aria-label="Chart comparing income-eligible MIHU applicants with homes awarded: 426 eligible and 45 awarded in 2024, and 382 eligible and 15 awarded in 2025."></canvas></div>
+      <p class="src-line">Calendar-year figures from the County's statutory MIHU Annual Analysis. Percentages are awarded homes as a share of income-eligible applicants.</p>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The County states it plainly: of the 471 households that applied for a MIHU home in 2024, <strong>45 were awarded one &mdash; about 1 in 10 applicants</strong>. In 2025 the ratio fell to <strong>15 of 382 income-eligible applicants, under 1 in 25</strong>.</span>
+    </div>
+
+    <h3>For-Sale MIHUs Awarded by Fiscal Year</h3>
+    <p class="subcap">Homes awarded to first-time homebuyers</p>
+    <div class="panel">
+      <div class="chart-wrap sm"><canvas id="chartMihuTrend" role="img" aria-label="Bar chart of for-sale MIHUs awarded by fiscal year: 50 in FY2024, 30 in FY2025, and 16 in FY2026."></canvas></div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span><strong>Supply is shrinking while prices climb.</strong> For-sale awards fell from 50 in FY2024 to 16 in FY2026, a <strong>68% drop</strong> in two years. Over the same period the average new MIHU townhome rose 15% and the average MIHU rent rose 19%. Across 2018&ndash;2025 the program awarded 287 homes &mdash; about <strong>36 a year</strong> against an estimated countywide shortfall of roughly 20,000 affordable units.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>Howard County Department of Housing and Community Development, <a href="https://www.howardcountymd.gov/housing-community-development/moderate-income-housing-unit-mihu" target="_blank" rel="noopener">MIHU program overview</a>, <a href="https://www.howardcountymd.gov/DHCD-MIHU-Program" target="_blank" rel="noopener">MIHU Homeownership Program</a> (buyer income limits effective January 1, 2026), and <a href="https://www.howardcountymd.gov/DHCD-MIHU-Rental" target="_blank" rel="noopener">MIHU rental program</a> (renter income limits effective January 1, 2026).</li>
+        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-04/13.402%28j%29%20-%202025%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2025 MIHU Annual Analysis</a> &mdash; CY2025 applicants, eligibility, awards, average prices and rents, and rental inventory.</li>
+        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2025-06/13.402%28j%29%20-%202024%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2024 MIHU Annual Analysis</a> &mdash; CY2024 applicants, eligibility, awards, and average prices and rents.</li>
+        <li>Howard County, <a href="https://dash.howardcountymd.gov/who-can-afford-buy-home-howard-county" target="_blank" rel="noopener">Who Can Afford to Buy a Home in Howard County</a> &mdash; the County's own "about 1 in 10 applicants" statement.</li>
+        <li>Howard County Code, <a href="https://library.municode.com/md/howard_county/codes/code_of_ordinances?nodeId=HOCOCO_TIT13HOCODE_SUBTITLE_4MOINHOUN" target="_blank" rel="noopener">Title 13, Subtitle 4</a> &mdash; &sect;&nbsp;13.403 pricing and rent formulas, &sect;&nbsp;13.404 resale price cap, &sect;&nbsp;13.405 perpetual rental restrictions, &sect;&nbsp;13.406 eligibility and priorities.</li>
+        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-05/FY27%20Budget%20Presentation%20-%20Housing.%202026.05.11.pdf" target="_blank" rel="noopener">FY27 Budget Presentation</a> (FY26 awards, 287 homes 2018&ndash;2025, perpetual affordability) and <a href="https://cc.howardcountymd.gov/sites/default/files/2025-05/2025.05.14%20Housing%20FY26%20Budget%20Presentation.pdf" target="_blank" rel="noopener">FY26 Budget Presentation</a> (FY25 awards).</li>
+        <li>Howard County, <a href="https://cc.howardcountymd.gov/sites/default/files/2024-04/FY2025%20Executives%20Proposed%20Operating%20Budget%20Book.pdf" target="_blank" rel="noopener">FY2025 Executive's Proposed Operating Budget</a> &mdash; FY24 awards.</li>
+        <li>Market comparisons: <a href="https://www.redfin.com/county/1322/MD/Howard-County/housing-market" target="_blank" rel="noopener">Redfin Howard County median sale price</a>, $628,000 (May 2026); <em>2024 Howard County Rental Survey</em> countywide average market rent of $1,979 and 2BR market average of $2,135.</li>
+        <li>Unmet-need estimate of roughly 20,000 units: Housing Affordability Coalition <a href="https://www.acshoco.org/wp-content/uploads/2021/09/HCBD-HAC-Draft-Plan-Comments_9.14.2021.pdf" target="_blank" rel="noopener">comments on the draft Housing Opportunities Master Plan</a>, September 14, 2021, citing the County's consultant study.</li>
+        <li>Percentages comparing MIHU prices and rents with market figures, and shares of eligible applicants served, are calculated from the sourced values above. The purchase comparison is not a matched pair: the MIHU figure covers new townhomes in CY2025 while the market median covers all home types in May 2026.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ COST BURDEN ============ -->
+  <section class="section" id="cost-burden">
+    <h2 class="section-title">Housing Cost Burdens for Renters and Homeowners</h2>
+    <p class="section-sub">A household is cost-burdened if it spends more than 30% of gross income on housing costs.</p>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0">Renter Cost Burden</h3>
+        <div class="chart-wrap sm"><canvas id="chartBurdenRent" role="img" aria-label="Donut chart of renter households by cost burden: 17,522 not burdened, 8,309 moderately burdened, 7,672 severely burdened."></canvas></div>
+        <div class="callout">
+          <span class="ico" aria-hidden="true">&#9432;</span>
+          <span><strong>47.7% of renters are cost-burdened</strong> (~15,981 households)</span>
+        </div>
+        <p class="src-line">Source: Census ACS 2020&ndash;2024 5-year (B25070). Universe: 33,503 renter households paying rent.</p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">Owner Cost Burden (w/ Mortgage)</h3>
+        <div class="chart-wrap sm"><canvas id="chartBurdenOwn" role="img" aria-label="Donut chart of owner households with a mortgage by cost burden: 48,785 not burdened, 8,100 moderately burdened, 5,410 severely burdened."></canvas></div>
+        <div class="callout">
+          <span class="ico" aria-hidden="true">&#9432;</span>
+          <span><strong>21.7% of owners with mortgages are cost-burdened</strong> (~13,510 households)</span>
+        </div>
+        <p class="src-line">Source: Census ACS 2020&ndash;2024 5-year (B25091). Universe: 62,295 owner households with a mortgage.</p>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Nearly half of Howard County renters &mdash; about <strong>16,000 households</strong> &mdash; spend more than 30% of gross income on housing, more than double the rate among homeowners with a mortgage.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25070&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25070</a> &mdash; gross rent as a percentage of household income.</li>
+        <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25091&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25091</a> &mdash; mortgage status by selected monthly owner costs as a percentage of household income.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ DISPARITIES ============ -->
+  <section class="section" id="disparities">
+    <h2 class="section-title">Housing Cost Burdens by Race &amp; Ethnicity</h2>
+    <p class="section-sub">The same cost burden falls unevenly across Howard County households.</p>
+
+    <div class="legend">
+      <span><i class="sw" style="background:var(--gold)" aria-hidden="true"></i> Moderate (30&ndash;50% of income)</span>
+      <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Severe (&gt;50% of income)</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0">Renter Cost Burden by Race &amp; Ethnicity</h3>
+        <div class="chart-wrap md"><canvas id="chartRaceRent" role="img" aria-label="Stacked bar chart of renter cost burden by race and ethnicity: Hispanic or Latino 57 percent, Other or multiple 48 percent, Black 46 percent, Asian 44 percent, White non-Hispanic 35 percent."></canvas></div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">Homeowner Cost Burden by Race &amp; Ethnicity</h3>
+        <p class="subcap">All owner-occupied households, with or without a mortgage.</p>
+        <div class="chart-wrap md"><canvas id="chartRaceOwn" role="img" aria-label="Stacked bar chart of homeowner cost burden by race and ethnicity: Black 24 percent, Other or multiple 20 percent, Asian 19 percent, Hispanic or Latino 15 percent, White non-Hispanic 15 percent."></canvas></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Among renters, <strong>57% of Hispanic or Latino households</strong> are cost-burdened (1,535 of 2,680), compared with 35% of White non-Hispanic households &mdash; a 22-point gap. Among homeowners, Black households are burdened at <strong>24%</strong> (2,830 of 11,815) versus 15% for White non-Hispanic households.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources</strong>
+      <ol>
+        <li>U.S. Department of Housing and Urban Development, <a href="https://www.huduser.gov/portal/datasets/cp.html" target="_blank" rel="noopener">Comprehensive Housing Affordability Strategy (CHAS) data</a>, 2018&ndash;2022 release (published December 23, 2025), <strong>Table 9</strong> &mdash; tenure by race and ethnicity of householder by cost burden, Howard County, Maryland (<a href="https://www.huduser.gov/portal/datasets/cp/2018thru2022-050-csv.zip">county-level CSV</a>, GEOID 0500000US24027). Percentages are calculated from the published household counts; hover any bar for the underlying counts.</li>
+        <li>Denominator is all households in each group, including the small number for whom cost burden was not computed (no or negative income). CHAS rounds household counts to the nearest 5, so shares carry roughly &plusmn;0.2 percentage points of rounding noise.</li>
+        <li><strong>Note on vintage:</strong> CHAS is built on ACS 2018&ndash;2022 5-year estimates, an earlier period than the ACS 2020&ndash;2024 estimates used in the countywide cost-burden card above. HUD has not yet released a CHAS edition based on 2020&ndash;2024 data, so the two cards are not directly comparable and the countywide totals differ slightly.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ METHODOLOGY ============ -->
+  <section class="section" id="methodology">
+    <h2 class="section-title">Methodology &amp; Sources</h2>
+    <p class="section-sub">How every figure on this dashboard is calculated, and where it comes from.</p>
+
+    <div class="grid-2">
+      <div>
+        <div class="meth-item">
+          <h4>Median listing price, not median sale price</h4>
+          <p>The homebuying section uses the Realtor.com median <em>listing</em> price for Howard County, which reflects what is currently on the market rather than what has closed. It is refreshed monthly.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Mortgage cost assumptions</h4>
+          <p>10% down on a 30-year fixed loan at the latest Freddie Mac PMMS rate; property tax at the 1.014% effective combined county and state rate; homeowners insurance at $150/month; PMI at ~0.55% of the loan annually. Income required is the total monthly cost at a 28% front-end debt-to-income ratio.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Rent benchmark</h4>
+          <p>The two-bedroom rent range uses Howard County Housing Commission Housing Choice Voucher payment standards rather than asking-rent estimates, because payment standards are an official, citable county benchmark set by bedroom count and ZIP code.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Affordable rental gap</h4>
+          <p>Taken verbatim from Table 64, &ldquo;Penetration Rate Analysis,&rdquo; page 93 of the 2024 Howard County Rental Survey. The report publishes supply, demand, and a penetration rate for each band; the shortage and surplus figures here are supply minus demand. The headline figure sums the three bands below 60% of area median income, which together represent the most deeply underserved renters.</p>
+        </div>
+      </div>
+      <div>
+        <div class="meth-item">
+          <h4>MIHU program</h4>
+          <p>Applicant, award, price, and rent figures come from the County's statutory MIHU Annual Analysis, which reports on a calendar-year basis. Award counts by fiscal year come from DHCD budget presentations. The two series are not interchangeable and are never combined in one chart. Rental inventory counts in County documents measure different things across years, so only the most recent count is shown rather than a trend.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Cost burden</h4>
+          <p>A household is cost-burdened at more than 30% of gross income for housing, and severely burdened at more than 50%. Renter figures come from ACS Table B25070 and cover renter households paying cash rent; owner figures come from Table B25091 and cover owner households with a mortgage.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Race and ethnicity</h4>
+          <p>Cost burden by race and ethnicity uses HUD CHAS tabulations of ACS microdata, which cross tenure and cost burden with the race and ethnicity of the householder &mdash; a breakdown the published ACS tables do not provide. Because the current CHAS release is built on ACS 2018&ndash;2022, that card runs two years behind the ACS 2020&ndash;2024 figures used elsewhere, and its homeowner series covers all owner-occupied households rather than only those with a mortgage.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Refresh cadence</h4>
+          <p>The median listing price and mortgage rate are reviewed on the 5th of each month. HCHC payment standards are reviewed each January, when new standards take effect. Census and Rental Housing Survey figures update when new releases are published.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Static figures</h4>
+          <p>This dashboard is a static page. Every value, chart series, and citation is fixed at publication and changes only when the dashboard is rebuilt and republished.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Full source list</strong>
+      <ol>
+        <li>Realtor.com &mdash; <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a>.</li>
+        <li>Freddie Mac &mdash; <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Primary Mortgage Market Survey</a>.</li>
+        <li>Howard County Housing Commission &mdash; <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a>, effective January 1, 2026.</li>
+        <li>Real Property Research Group for the Howard County Housing Commission and DHCD &mdash; <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, Table 64, page 93.</li>
+        <li>U.S. Census Bureau &mdash; <a href="https://data.census.gov" target="_blank" rel="noopener">American Community Survey 5-Year Estimates</a>, Tables B19013, B25003, B25070, B25091.</li>
+        <li>U.S. Department of Housing and Urban Development &mdash; <a href="https://www.huduser.gov/portal/datasets/cp.html" target="_blank" rel="noopener">CHAS data, 2018&ndash;2022 release</a>, Table 9, and <a href="https://www.huduser.gov/portal/datasets/il.html" target="_blank" rel="noopener">FY2026 income limits</a>.</li>
+        <li>Howard County Department of Finance &mdash; <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">property tax rates</a>.</li>
+        <li>Comptroller of Maryland &mdash; <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">county affordability profile</a>.</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <strong style="color:#fff">Housing Affordability Coalition</strong> &middot; Howard County, Maryland<br>
+    Data compiled and maintained by the Coalition. Market data as of August 3, 2026.
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Shared configuration
+   ============================================================ */
+const C = {
+  navy:  '#192744',
+  coral: '#e86c5a',
+  blue:  '#4a8bc2',
+  blueDk:'#156082',
+  gold:  '#d4a843',
+  green: '#2f7d32',
+  muted: '#5f6672',
+  border:'#dcdcd8',
+  tile:  '#ececeb'
+};
+
+if (window.Chart) {
+  Chart.defaults.font.family = "'Inter', system-ui, -apple-system, sans-serif";
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = C.muted;
+  Chart.defaults.borderColor = C.border;
+  Chart.defaults.maintainAspectRatio = false;
+  Chart.defaults.plugins.legend.labels.usePointStyle = true;
+  Chart.defaults.plugins.legend.labels.boxWidth = 8;
+  Chart.defaults.plugins.legend.labels.boxHeight = 8;
+  Chart.defaults.plugins.legend.labels.padding = 14;
+  Chart.defaults.plugins.tooltip.backgroundColor = C.navy;
+  Chart.defaults.plugins.tooltip.padding = 10;
+  Chart.defaults.plugins.tooltip.cornerRadius = 6;
+  Chart.defaults.plugins.tooltip.boxPadding = 6;
+  Chart.defaults.plugins.tooltip.titleFont = { weight: '600' };
+}
+
+const usd  = n => '$' + Math.round(n).toLocaleString('en-US');
+const usdK = n => '$' + Math.round(n / 1000).toLocaleString('en-US') + 'K';
+const num  = n => Math.round(n).toLocaleString('en-US');
+
+/* Draws a value label at the end of each bar in a horizontal bar chart. */
+function endLabelPlugin(opts) {
+  return {
+    id: 'endLabel' + (opts.key || ''),
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(opts.datasetIndex || 0);
+      if (!meta || meta.hidden) return;
+      ctx.save();
+      ctx.font = '600 11.5px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      meta.data.forEach((el, i) => {
+        const text = opts.text(i);
+        if (!text) return;
+        ctx.fillStyle = opts.color ? opts.color(i) : C.muted;
+        ctx.fillText(text, el.x + 7, el.y);
+      });
+      ctx.restore();
+    }
+  };
+}
+
+/* Draws a dashed reference line + label at a value on the x axis. */
+function refLinePlugin(value, label, color) {
+  return {
+    id: 'refLine' + label.replace(/\W/g, ''),
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      const x = scales.x.getPixelForValue(value);
+      if (!isFinite(x)) return;
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1.25;
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x, chartArea.top);
+      ctx.lineTo(x, chartArea.bottom);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = '600 11px Inter, sans-serif';
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(label, x, chartArea.top - 3);
+      ctx.restore();
+    }
+  };
+}
+
+/* ============================================================
+   1. Homebuying donut
+   ============================================================ */
+new Chart(document.getElementById('chartBuyDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Principal & Interest', 'Property Tax', 'Insurance', 'PMI'],
+    datasets: [{
+      data: [3962, 579, 150, 283],
+      backgroundColor: [C.coral, C.blue, C.gold, C.navy],
+      borderColor: '#fff',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    cutout: '58%',
+    layout: { padding: 4 },
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          label: c => ' ' + c.label + ': ' + usd(c.parsed) + '/mo'
+        }
+      }
+    }
+  }
+});
+
+/* ============================================================
+   2. Community charts  (data injected below)
+   ============================================================ */
+/* Realtor.com place-level market pages, retrieved July 31, 2026.
+   County reference is Realtor.com's own countywide median listing price for
+   the same series, so the bars and the reference line share a basis. */
+const COMMUNITY_PRICE = {
+  median: 685000,
+  note: 'Source: Realtor.com, Howard County place-level market trends, retrieved July 31, 2026. County median listing price $685,000. Reporting months are not stated for every community, so community values may not all reflect the same month.',
+  rows: [
+    { name: 'Elkridge',       value: 494450  },
+    { name: 'Columbia',       value: 495000  },
+    { name: 'North Laurel',   value: 532500  },
+    { name: 'Ellicott City',  value: 699900  },
+    { name: 'Scaggsville',    value: 750000  },
+    { name: 'Marriottsville', value: 760625  },
+    { name: 'Woodbine',       value: 862500  },
+    { name: 'Fulton',         value: 994990  },
+    { name: 'Clarksville',    value: 999990  },
+    { name: 'Highland',       value: 1350000 }
+  ]
+};
+
+/* ACS 2020–2024 5-Year Estimates, Table B25003, Census Designated Places. */
+const COMMUNITY_OWN = {
+  average: 71.5,
+  note: 'Source: U.S. Census Bureau, ACS 2020–2024 5-Year Estimates, Table B25003, Census Designated Places. County average 71.5%. Clarksville and West Friendship have no Census place record and cannot be charted; their ZIP-code areas (21029 and 21794) run 93.6% and 99.5%, but cover broader rural territory. Lisbon rests on just 29 occupied units, so read it as near-universal owner occupancy.',
+  rows: [
+    { name: 'Lisbon',        value: 100.0 },
+    { name: 'Scaggsville',   value: 92.3  },
+    { name: 'Highland',      value: 89.6  },
+    { name: 'Ellicott City', value: 72.0  },
+    { name: 'Columbia',      value: 64.8  },
+    { name: 'Elkridge',      value: 62.3  },
+    { name: 'North Laurel',  value: 62.3  },
+    { name: 'Savage',        value: 58.6  }
+  ]
+};
+
+document.getElementById('commSources').innerHTML = [
+  '<li>Realtor.com &mdash; place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $685,000 at $265 per square foot.</li>',
+  '<li>U.S. Census Bureau &mdash; <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places.</li>',
+  '<li>The county reference line uses the same $685,000 median listing price shown in the Key Metrics and homebuying sections above, so all three are on one consistent Realtor.com series.</li>'
+].join('');
+
+if (COMMUNITY_PRICE) {
+  const d = COMMUNITY_PRICE;
+  new Chart(document.getElementById('chartCommPrice'), {
+    type: 'bar',
+    data: {
+      labels: d.rows.map(r => r.name),
+      datasets: [{
+        data: d.rows.map(r => r.value),
+        backgroundColor: d.rows.map(r => r.value >= d.median ? C.navy : C.blue),
+        borderRadius: 2,
+        barPercentage: 0.72
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      layout: { padding: { top: 16, right: 74 } },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: '#f0f0ec' },
+          ticks: { callback: v => usdK(v) }
+        },
+        y: { grid: { display: false }, ticks: { font: { size: 11.5 } } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => ' Median listing price: ' + usd(c.parsed.x) } }
+      }
+    },
+    plugins: [
+      refLinePlugin(d.median, 'County Median ' + usd(d.median), C.coral),
+      endLabelPlugin({ key: 'P', datasetIndex: 0, text: i => usd(d.rows[i].value), color: () => C.muted })
+    ]
+  });
+  document.getElementById('srcCommPrice').textContent = d.note;
+}
+
+if (COMMUNITY_OWN) {
+  const d = COMMUNITY_OWN;
+  new Chart(document.getElementById('chartCommOwn'), {
+    type: 'bar',
+    data: {
+      labels: d.rows.map(r => r.name),
+      datasets: [{
+        data: d.rows.map(r => r.value),
+        backgroundColor: d.rows.map(r => r.value >= d.average ? C.blue : C.coral),
+        borderRadius: 2,
+        barPercentage: 0.72
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      layout: { padding: { top: 16, right: 52 } },
+      scales: {
+        x: {
+          beginAtZero: true, max: 100,
+          grid: { color: '#f0f0ec' },
+          ticks: { callback: v => v + '%' }
+        },
+        y: { grid: { display: false }, ticks: { font: { size: 11.5 } } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => ' Homeownership rate: ' + c.parsed.x.toFixed(0) + '%' } }
+      }
+    },
+    plugins: [
+      refLinePlugin(d.average, 'County avg ' + Math.round(d.average) + '%', C.coral),
+      endLabelPlugin({ key: 'O', datasetIndex: 0, text: i => Math.round(d.rows[i].value) + '%', color: () => C.muted })
+    ]
+  });
+  document.getElementById('srcCommOwn').textContent = d.note;
+}
+
+/* ============================================================
+   3. Affordable rental gap — supply inside demand outline
+   ============================================================ */
+/* Verbatim from Table 64, "Penetration Rate Analysis," page 93 of the
+   2024 Howard County Rental Survey (Real Property Research Group).
+   demand = "Estimated No. of Qualifying Renter Hhlds";
+   supply = "Inventory Serving this Band"; rate = penetration rate as printed.
+   The report prints no gap column — gap is supply minus demand. */
+const GAP = [
+  { band: 'Extremely Low (<30%)', demand: 4140,  supply: 1268,  rate: '30.6%'  },
+  { band: 'Very Low (30–50%)',    demand: 4413,  supply: 1084,  rate: '24.6%'  },
+  { band: 'Low (50–60%)',         demand: 4074,  supply: 2166,  rate: '53.2%'  },
+  { band: 'Moderate (60–80%)',    demand: 5653,  supply: 10729, rate: '189.8%' },
+  { band: 'High (80–100%)',       demand: 6312,  supply: 13537, rate: '214.5%' },
+  { band: 'Very High (100%+)',    demand: 12310, supply: 7932,  rate: '64.4%'  }
+];
+GAP.forEach(g => { g.gap = g.supply - g.demand; });
+
+new Chart(document.getElementById('chartGap'), {
+  type: 'bar',
+  data: {
+    labels: GAP.map(g => g.band),
+    datasets: [
+      {
+        label: 'Households in this income band (demand)',
+        data: GAP.map(g => g.demand),
+        backgroundColor: C.tile,
+        borderColor: C.navy,
+        borderWidth: 1.5,
+        barPercentage: 0.82,
+        grouped: false,
+        order: 2
+      },
+      {
+        label: 'Rental homes affordable at this income level (supply)',
+        data: GAP.map(g => g.supply),
+        backgroundColor: C.blue,
+        borderWidth: 0,
+        barPercentage: 0.44,
+        grouped: false,
+        order: 1
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { right: 118, left: 6 } },
+    scales: {
+      x: {
+        beginAtZero: true,
+        suggestedMax: 16000,
+        title: { display: true, text: 'Renter households / affordable rental homes', font: { size: 11.5, weight: '500' } },
+        grid: { color: '#f0f0ec' },
+        ticks: { callback: v => (v / 1000) + 'k' }
+      },
+      y: {
+        grid: { display: false },
+        afterFit: s => { s.width = 168; },
+        ticks: { font: { size: 11.5 }, autoSkip: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: items => GAP[items[0].dataIndex].band,
+          label: () => '',
+          afterBody: items => {
+            const g = GAP[items[0].dataIndex];
+            return [
+              'Demand: ' + num(g.demand) + ' households',
+              'Supply: ' + num(g.supply) + ' homes',
+              (g.gap < 0 ? 'Shortage: ' : 'Surplus: ') + num(Math.abs(g.gap)),
+              'Penetration rate: ' + g.rate
+            ];
+          }
+        }
+      }
+    }
+  },
+  plugins: [{
+    /* Label sits past whichever bar is longer, so it never overlaps. */
+    id: 'gapLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx, scales } = chart;
+      ctx.save();
+      ctx.font = '600 11.5px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      chart.getDatasetMeta(0).data.forEach((el, i) => {
+        const g = GAP[i];
+        const x = scales.x.getPixelForValue(Math.max(g.demand, g.supply));
+        ctx.fillStyle = g.gap < 0 ? '#c1462f' : C.green;
+        ctx.fillText(
+          (g.gap < 0 ? 'Shortage: ' : 'Surplus: ') + num(Math.abs(g.gap)),
+          x + 9, el.y
+        );
+      });
+      ctx.restore();
+    }
+  }]
+});
+
+/* ============================================================
+   4. Cost burden donuts
+   ============================================================ */
+function burdenDonut(canvasId, values) {
+  new Chart(document.getElementById(canvasId), {
+    type: 'doughnut',
+    data: {
+      labels: ['Not Burdened (<30%)', 'Moderate (30–49.9%)', 'Severe (50%+)'],
+      datasets: [{
+        data: values,
+        backgroundColor: [C.blue, C.gold, C.coral],
+        borderColor: '#fff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      cutout: '56%',
+      layout: { padding: 4 },
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: c => {
+              const tot = c.dataset.data.reduce((a, b) => a + b, 0);
+              return ' ' + c.label + ': ' + num(c.parsed) + ' HHs (' +
+                     (c.parsed / tot * 100).toFixed(1) + '%)';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+burdenDonut('chartBurdenRent', [17522, 8309, 7672]);
+burdenDonut('chartBurdenOwn',  [48785, 8100, 5410]);
+
+/* ============================================================
+   5. Cost burden by race & ethnicity
+   ============================================================ */
+/* rows: { group, hh, mod, sev } — raw CHAS household counts.
+   Percentages are computed from the counts so segments and totals are exact. */
+function raceChart(canvasId, rows) {
+  const pct = (n, d) => (n / d) * 100;
+  rows.forEach(r => {
+    r.moderate = pct(r.mod, r.hh);
+    r.severe   = pct(r.sev, r.hh);
+    r.total    = pct(r.mod + r.sev, r.hh);
+  });
+  new Chart(document.getElementById(canvasId), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.group),
+      datasets: [
+        {
+          label: 'Moderate (30–50% of income)',
+          data: rows.map(r => r.moderate),
+          backgroundColor: C.gold,
+          borderRadius: 2,
+          barPercentage: 0.68
+        },
+        {
+          label: 'Severe (>50% of income)',
+          data: rows.map(r => r.severe),
+          backgroundColor: C.coral,
+          borderRadius: 2,
+          barPercentage: 0.68
+        }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      layout: { padding: { right: 42, left: 6 } },
+      scales: {
+        x: {
+          stacked: true, beginAtZero: true, max: 70,
+          grid: { color: '#f0f0ec' },
+          ticks: { callback: v => v + '%' }
+        },
+        y: {
+          stacked: true,
+          grid: { display: false },
+          afterFit: s => { s.width = 132; },
+          ticks: { font: { size: 11.5 }, autoSkip: false }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: c => {
+              const r = rows[c.dataIndex];
+              const n = c.datasetIndex === 0 ? r.mod : r.sev;
+              return ' ' + c.dataset.label + ': ' + c.parsed.x.toFixed(1) +
+                     '% (' + num(n) + ' households)';
+            },
+            footer: items => {
+              const r = rows[items[0].dataIndex];
+              return 'Total burdened: ' + r.total.toFixed(1) + '% — ' +
+                     num(r.mod + r.sev) + ' of ' + num(r.hh) + ' households';
+            }
+          }
+        }
+      }
+    },
+    plugins: [{
+      id: 'raceTotal' + canvasId,
+      afterDatasetsDraw(chart) {
+        const { ctx, scales } = chart;
+        ctx.save();
+        ctx.font = '600 11.5px Inter, sans-serif';
+        ctx.fillStyle = C.muted;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        chart.getDatasetMeta(1).data.forEach((el, i) => {
+          ctx.fillText(Math.round(rows[i].total) + '%', el.x + 7, el.y);
+        });
+        ctx.restore();
+      }
+    }]
+  });
+}
+
+/* Household counts transcribed from HUD CHAS 2018–2022, Table 9,
+   Howard County, Maryland (GEOID 0500000US24027).
+   hh = all households in the group; mod = paying 30–50% of income;
+   sev = paying more than 50%. */
+raceChart('chartRaceRent', [
+  { group: 'Hispanic / Latino',    hh: 2680,  mod: 945,  sev: 590  },
+  { group: 'Other / Multiple',     hh: 1365,  mod: 390,  sev: 265  },
+  { group: 'Black',                hh: 11725, mod: 2480, sev: 2945 },
+  { group: 'Asian',                hh: 4370,  mod: 805,  sev: 1095 },
+  { group: 'White (non-Hispanic)', hh: 13130, mod: 2145, sev: 2445 }
+]);
+
+raceChart('chartRaceOwn', [
+  { group: 'Black',                hh: 11815, mod: 1680, sev: 1150 },
+  { group: 'Other / Multiple',     hh: 2585,  mod: 320,  sev: 190  },
+  { group: 'Asian',                hh: 14715, mod: 1580, sev: 1230 },
+  { group: 'Hispanic / Latino',    hh: 3900,  mod: 395,  sev: 185  },
+  { group: 'White (non-Hispanic)', hh: 52790, mod: 4555, sev: 3280 }
+]);
+
+/* ============================================================
+   6. MIHU — price and rent versus market
+   ============================================================ */
+function mihuCompare(canvasId, rows, fmt, axisFmt, axisMax, tipLabel) {
+  new Chart(document.getElementById(canvasId), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.label),
+      datasets: [{
+        data: rows.map(r => r.value),
+        backgroundColor: rows.map(r => r.mihu ? C.blue : C.navy),
+        borderRadius: 2,
+        barPercentage: 0.6
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      layout: { padding: { top: 4, right: 84, left: 6 } },
+      scales: {
+        x: {
+          beginAtZero: true, suggestedMax: axisMax,
+          grid: { color: '#f0f0ec' },
+          ticks: { callback: axisFmt }
+        },
+        y: {
+          grid: { display: false },
+          afterFit: s => { s.width = 150; },
+          ticks: { font: { size: 11.5 }, autoSkip: false }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => ' ' + tipLabel + ': ' + usd(c.parsed.x) } }
+      }
+    },
+    plugins: [
+      endLabelPlugin({
+        key: canvasId,
+        datasetIndex: 0,
+        text: i => fmt(rows[i].value),
+        color: i => rows[i].mihu ? C.blue : C.navy
+      })
+    ]
+  });
+}
+
+mihuCompare('chartMihuPrice', [
+  { label: 'MIHU new townhome',  value: 348017, mihu: true },
+  { label: 'County median sale', value: 628000, mihu: false }
+], usd, v => usdK(v), 700000, 'Price');
+
+mihuCompare('chartMihuRent', [
+  { label: 'MIHU average rent',   value: 1488, mihu: true },
+  { label: 'Market average rent', value: 1979, mihu: false }
+], usd, v => usd(v), 2200, 'Monthly rent');
+
+/* ============================================================
+   7. MIHU — eligible applicants versus homes awarded
+   ============================================================ */
+const MIHU_ACCESS = [
+  { year: '2024', eligible: 426, awarded: 45 },
+  { year: '2025', eligible: 382, awarded: 15 }
+];
+
+new Chart(document.getElementById('chartMihuAccess'), {
+  type: 'bar',
+  data: {
+    labels: MIHU_ACCESS.map(r => 'CY ' + r.year),
+    datasets: [
+      {
+        label: 'Income-eligible applicants',
+        data: MIHU_ACCESS.map(r => r.eligible),
+        backgroundColor: C.tile,
+        borderColor: C.navy,
+        borderWidth: 1.5,
+        barPercentage: 0.7,
+        grouped: false,
+        order: 2
+      },
+      {
+        label: 'Homes awarded',
+        data: MIHU_ACCESS.map(r => r.awarded),
+        backgroundColor: C.blue,
+        borderWidth: 0,
+        barPercentage: 0.36,
+        grouped: false,
+        order: 1
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { top: 4, right: 150, left: 6 } },
+    scales: {
+      x: {
+        beginAtZero: true, suggestedMax: 460,
+        title: { display: true, text: 'Households', font: { size: 11.5, weight: '500' } },
+        grid: { color: '#f0f0ec' },
+        ticks: { callback: v => num(v) }
+      },
+      y: {
+        grid: { display: false },
+        afterFit: s => { s.width = 76; },
+        ticks: { font: { size: 12 }, autoSkip: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: items => 'Calendar year ' + MIHU_ACCESS[items[0].dataIndex].year,
+          label: () => '',
+          afterBody: items => {
+            const r = MIHU_ACCESS[items[0].dataIndex];
+            return [
+              'Income-eligible applicants: ' + num(r.eligible),
+              'Homes awarded: ' + num(r.awarded),
+              'Share served: ' + (r.awarded / r.eligible * 100).toFixed(1) + '%'
+            ];
+          }
+        }
+      }
+    }
+  },
+  plugins: [{
+    id: 'mihuAccessLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx, scales } = chart;
+      ctx.save();
+      ctx.font = '600 11.5px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      chart.getDatasetMeta(0).data.forEach((el, i) => {
+        const r = MIHU_ACCESS[i];
+        const x = scales.x.getPixelForValue(r.eligible);
+        ctx.fillStyle = '#c1462f';
+        ctx.fillText(
+          num(r.awarded) + ' of ' + num(r.eligible) + ' served (' +
+          (r.awarded / r.eligible * 100).toFixed(1) + '%)',
+          x + 9, el.y
+        );
+      });
+      ctx.restore();
+    }
+  }]
+});
+
+/* ============================================================
+   8. MIHU — for-sale awards by fiscal year
+   ============================================================ */
+const MIHU_TREND = [
+  { fy: 'FY2024', awards: 50 },
+  { fy: 'FY2025', awards: 30 },
+  { fy: 'FY2026', awards: 16 }
+];
+
+new Chart(document.getElementById('chartMihuTrend'), {
+  type: 'bar',
+  data: {
+    labels: MIHU_TREND.map(r => r.fy),
+    datasets: [{
+      data: MIHU_TREND.map(r => r.awards),
+      backgroundColor: [C.navy, C.blue, C.coral],
+      borderRadius: 3,
+      barPercentage: 0.5
+    }]
+  },
+  options: {
+    layout: { padding: { top: 26, right: 8, left: 6 } },
+    scales: {
+      y: {
+        beginAtZero: true, suggestedMax: 58,
+        title: { display: true, text: 'Homes awarded', font: { size: 11.5, weight: '500' } },
+        grid: { color: '#f0f0ec' },
+        ticks: { precision: 0 }
+      },
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => ' ' + num(c.parsed.y) + ' homes awarded' } }
+    }
+  },
+  plugins: [{
+    id: 'mihuTrendLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = '600 13px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      chart.getDatasetMeta(0).data.forEach((el, i) => {
+        ctx.fillStyle = i === 2 ? '#c1462f' : C.navy;
+        ctx.fillText(num(MIHU_TREND[i].awards), el.x, el.y - 6);
+      });
+      ctx.restore();
+    }
+  }]
+});
+</script>
+</body>
+</html>
