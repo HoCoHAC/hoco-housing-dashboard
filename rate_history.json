@@ -7,6 +7,15 @@
     "observed_week": "7/30/2026",
     "gap": 0.0,
     "threshold": 0.25,
+    "rate_crossed": false,
+    "displayed_price": 685000.0,
+    "observed_price": 685000.0,
+    "price_changed": false,
+    "crosscheck": {
+      "reference": 691500.0,
+      "month": "202606",
+      "divergence_pct": -0.94
+    },
     "action": "hold"
   }
 ]
