@@ -79,7 +79,7 @@
   }
   .nav-inner::-webkit-scrollbar { display: none; }
   .nav-inner a {
-    color: #dbe2ee; padding: 12px 13px; font-size: 13.5px; font-weight: 500;
+    color: #dbe2ee; padding: 12px 12px; font-size: 13.5px; font-weight: 500;
     white-space: nowrap; text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: color .15s ease, border-color .15s ease;
@@ -288,13 +288,14 @@
   <nav class="nav" aria-label="Section navigation">
     <div class="nav-inner">
       <a href="#key-metrics">Key Metrics</a>
-      <a href="#homebuying">What It Takes to Buy</a>
-      <a href="#renting">What It Takes to Rent</a>
+      <a href="#homebuying">Buying</a>
+      <a href="#renting">Renting</a>
       <a href="#communities">By Community</a>
       <a href="#rental-gap">Affordable Rental Gap</a>
       <a href="#mihu">MIHU Program</a>
       <a href="#cost-burden">Cost Burden</a>
-      <a href="#disparities">Disparities by Race &amp; Ethnicity</a>
+      <a href="#disparities">Disparities by Race</a>
+      <a href="#disability">Disability</a>
       <a href="#methodology">Methodology</a>
     </div>
   </nav>
@@ -706,6 +707,72 @@
     </div>
   </section>
 
+  <!-- ============ DISABILITY & HOUSING ============ -->
+  <section class="section" id="disability">
+    <h2 class="section-title">Renting on a Disability Income</h2>
+    <p class="section-sub">About 28,952 Howard County residents live with a disability &mdash; 8.7% of the population, and 24.2% of those aged 65 and over. For the 3,881 residents whose income is a federal disability check rather than a paycheck, the distance between income and rent is the widest gap on this dashboard.</p>
+
+    <div class="buy-layout">
+      <div>
+        <div class="figure-block">
+          <div class="figure-label">Maximum monthly SSI benefit, 2026</div>
+          <div class="figure-value tnum">$994<span style="font-size:17px;font-weight:500;color:var(--muted);letter-spacing:0">/mo</span></div>
+        </div>
+        <div class="figure-block">
+          <div class="figure-label">Monthly shortfall on an average one-bedroom</div>
+          <div class="figure-value hero-num tnum">$1,668</div>
+          <p class="figure-note">Holding rent to the standard 30% of income leaves <strong>$298 a month</strong> out of a full SSI check. An average Howard County one-bedroom costs <strong>$1,966</strong> including tenant-paid utilities. The rent alone is <strong>198% of the entire benefit</strong> &mdash; before food, medicine or transportation.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap sm"><canvas id="chartDisSSI" role="img" aria-label="Horizontal bar chart comparing what a person living on Supplemental Security Income can pay for rent with what rent costs in Howard County: $298 affordable at 30 percent of the benefit, a $994 total monthly benefit, and $1,966 for an average one-bedroom including utilities."></canvas></div>
+        <p class="rent-caption">SSI is the federal benefit for people with disabilities who have almost no income or assets. Maryland adds a state supplement only in licensed care homes and assisted-living settings &mdash; not for someone renting an apartment on their own.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The Technical Assistance Collaborative's <em>Priced Out</em> analysis puts a one-bedroom at <strong>152% of SSI</strong> across the Baltimore-Columbia-Towson metro area and <strong>168%</strong> statewide. Howard County comes out higher &mdash; <strong>198%</strong> &mdash; because county rents run above the metro-wide average the national study uses. And $994 is the <em>maximum</em>: the average SSI payment actually received in Maryland is <strong>$718.98</strong>, which would put an average one-bedroom at 273% of income.</span>
+    </div>
+
+    <h3>Earnings, Not Just Benefits</h3>
+    <p class="subcap">Annual income by source, against the $78,640 a one-bedroom requires</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Below the income a one-bedroom needs</span>
+        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> At or above it</span>
+      </div>
+      <div class="chart-wrap sm"><canvas id="chartDisEarn" role="img" aria-label="Horizontal bar chart of annual income in Howard County against the $78,640 a one-bedroom requires: $11,928 a year on Supplemental Security Income, median earnings of $51,315 for workers with a disability, and $79,543 for workers without a disability."></canvas></div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Most people with disabilities are not living on SSI &mdash; but working does not close the gap either. Median earnings for a Howard County worker with a disability are <strong>$51,315</strong>, about <strong>65 cents for every dollar</strong> earned by a worker without one, and <strong>$27,325 short</strong> of the income an average one-bedroom takes. Workers without a disability clear that bar by <strong>$903</strong>. Poverty runs <strong>12.6%</strong> among residents with a disability against <strong>4.5%</strong> without.</span>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Because no wage or benefit at these levels reaches an average rent, subsidy is the only bridge &mdash; and it is scarce. Maryland reported roughly <strong>4,000 people waiting</strong> for affordable, accessible housing in FY2025 against a statewide Section 811 portfolio of <strong>319 units</strong>. Howard County's own recent additions are counted in the dozens: 19 units at Patuxent Commons, 9 at Robinson Overlook and 6 at The Marlow. The Housing Commission's Housing Choice Voucher waiting list is closed.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources &amp; assumptions</strong>
+      <ol>
+        <li>SSI benefit: the 2026 federal benefit rate for an eligible individual, <strong>$994 per month</strong> ($11,928 a year), from the <a href="https://www.ssa.gov/oact/cola/SSI.html" target="_blank" rel="noopener">Social Security Administration, SSI Federal Payment Amounts</a>, effective January 2026. This is the maximum; countable income reduces it.</li>
+        <li>Average payment actually received in Maryland, <strong>$718.98</strong> (December 2025): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_asr/2025/sect02.html" target="_blank" rel="noopener">SSA, <em>SSI Annual Statistical Report, 2025</em>, Table 11</a>.</li>
+        <li>Maryland's optional state supplement is paid only to people living in care homes, assisted living facilities and rehabilitative residences, and is not available to someone renting independently: <a href="https://www.ssa.gov/policy/docs/progdesc/ssi_st_asst/2011/md.html" target="_blank" rel="noopener">SSA, State Assistance Programs for SSI Recipients &mdash; Maryland</a>, and <a href="https://dhs.maryland.gov/weathering-tough-times/public-assistance-adults/" target="_blank" rel="noopener">Maryland Department of Human Services, Public Assistance to Adults</a>. Current-year supplement amounts are not published in a single place; the 2011 schedule is the most recent detailed table located.</li>
+        <li>Howard County SSI recipients, <strong>3,881</strong> in December 2025 (1,299 aged; 2,582 blind and disabled; 550 under 18, 1,677 aged 18&ndash;64, 1,654 aged 65 and over): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_sc/2025/md.html" target="_blank" rel="noopener">SSA, <em>SSI Recipients by State and County, 2025</em>, Table 3</a>. County figures cover federally administered payments only. SSA does not publish a county average payment, and dividing county payments by recipients overstates it, so no county average is shown here.</li>
+        <li>Rent: the <strong>$1,966</strong> gross one-bedroom is the same figure used in the renting section above &mdash; $1,761 average effective rent plus $205 in tenant-paid utilities, calculated for this dashboard from the <em>2024 Howard County Rental Survey</em>, Tables 23 and 24. It is a <strong>November 2023</strong> field survey, so current rents are likely higher and the gap correspondingly wider.</li>
+        <li>Comparison figures for the metro area and the state: <a href="https://www.tacinc.org/resources/priced-out/" target="_blank" rel="noopener">Technical Assistance Collaborative, <em>Priced Out</em></a>, 2026 edition, which uses HUD's revised FY2026 Fair Market Rents as a proxy for local rents. TAC does not publish a Howard County row; the 198% figure on this page is calculated here from the county's own surveyed rent, and is not TAC's. TAC's finding is that there is &ldquo;no United States housing market in which a person living solely on Supplemental Security Income (SSI) can afford a safe, decent apartment without rental assistance.&rdquo;</li>
+        <li>Disability population and age breakdown: <a href="https://planning.maryland.gov/MSDC/SiteAssets/ACS_Tables/1-Year/2024/Reports/CNTY_24027_ACS_2024.aspx" target="_blank" rel="noopener">Maryland Department of Planning, Howard County American Community Survey profile</a>, <strong>ACS 2024 1-year</strong>, confirmed against Census table S1810. 28,952 of 334,399 civilian noninstitutionalized residents (&plusmn;3,458).</li>
+        <li>Median earnings and poverty by disability status: Census table <strong>S1811, ACS 2024 5-year</strong> &mdash; median earnings for the population 16 and over with earnings, $51,315 with a disability and $79,543 without; poverty 12.6% and 4.5%. The 1-year release of S1811 is not published for Howard County, so this is a five-year average and covers a different, much larger population than the SSI figures above. Earnings are individual earnings, not household income.</li>
+        <li>Waiting list and Section 811 units: <a href="https://dlslibrary.state.md.us/publications/Exec/MDOD/HU7-113(f)_2025.pdf" target="_blank" rel="noopener">Maryland Department of Disabilities, <em>State Disabilities Plan Progress Analysis, FY2025 Annual Report</em></a> (November 2025), pages 6&ndash;7: &ldquo;In Fiscal Year 2025, around 4,000 people were on the waitlist for affordable, accessible housing,&rdquo; against 319 total Section 811 units statewide, 297 of them occupied. MDOD publishes program and waiting-list data but not income data for people with disabilities.</li>
+        <li>Local units: <a href="https://www.howardcountymd.gov/News110525b" target="_blank" rel="noopener">Howard County, Patuxent Commons announcement</a> (19 of 76 units for low-income residents with disabilities) and <a href="https://www.howardcountymd.gov/News081826" target="_blank" rel="noopener">Howard County, August 2026 release</a> (six accessible and affordable units at The Marlow, with an accessibility-prioritized wait list); <a href="https://dhcd.maryland.gov/HousingDevelopment/Documents/section811/RobinsonOverlook-TenantSelectionCriteria.pdf" target="_blank" rel="noopener">Maryland DHCD, Robinson Overlook resident selection plan</a>, page 2 (eight Section 811 units plus one Weinberg unit in Columbia). These are the units this dashboard could verify from published sources, not a county inventory &mdash; no countywide count of accessible affordable units is published. Voucher waiting list status: <a href="https://househoward.org/commission-housing-programs/" target="_blank" rel="noopener">Howard County Housing Commission</a>.</li>
+        <li>This card does not move with the monthly refresh that updates the homebuying figures above. The SSI benefit changes each January; the ACS figures change annually.</li>
+      </ol>
+    </div>
+  </section>
+
   <!-- ============ METHODOLOGY ============ -->
   <section class="section" id="methodology">
     <h2 class="section-title">Methodology &amp; Sources</h2>
@@ -720,6 +787,14 @@
         <div class="meth-item">
           <h4>Mortgage cost assumptions</h4>
           <p>10% down on a 30-year fixed loan at the latest Freddie Mac PMMS rate; property tax at the 1.014% effective combined county and state rate; homeowners insurance at $150/month; PMI at ~0.55% of the loan annually. Income required is the total monthly cost at a 28% front-end debt-to-income ratio.</p>
+        </div>
+        <div class="meth-item">
+          <h4>The 198% disability figure is ours, not TAC's</h4>
+          <p>The national <em>Priced Out</em> study reports one-bedroom rent as a share of SSI income for metro areas, not for Howard County. The 198% shown here is calculated for this dashboard by dividing the county's own surveyed gross one-bedroom rent by the 2026 SSI federal benefit rate. TAC's published metro figure, 152%, is shown alongside it so readers can see both.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Two different disability populations</h4>
+          <p>The disability section compares two groups that do not overlap neatly. SSI recipients (3,881 in Howard County) are a small, very low-income subset. The earnings and poverty figures cover the far larger population of about 28,952 residents with a disability, and report individual earnings rather than household income.</p>
         </div>
         <div class="meth-item">
           <h4>Rent benchmark</h4>
@@ -975,13 +1050,13 @@ new Chart(document.getElementById('chartRentIncome'), {
 /* Compact labels swapped in when the plot area is too narrow for full names,
    which otherwise get truncated on phones. */
 const SECTOR_SHORT = [
-  'Leisure & Hosp.', 'Nat. Resources', 'Other', 'Educ. & Health',
+  'Leisure/Hosp.', 'Nat. Resources', 'Other', 'Educ. & Health',
   'Trade & Transp.', 'Manufacturing', 'Government', 'Construction',
-  'Financial', 'Prof. & Business', 'Information'
+  'Financial', 'Prof. & Bus.', 'Information'
 ];
 const SECTOR_WAGES = [
   ['Leisure & Hospitality',        26368],
-  ['Natural Resources & Mining',   51848],
+  ['Nat. Resources & Mining',      51848],
   ['Other',                        52182],
   ['Education & Health',           58443],
   ['Trade, Transp. & Utilities',   69474],
@@ -1040,6 +1115,139 @@ new Chart(document.getElementById('chartRentWages'), {
       halo: '#fafaf8',
       text: i => usd(SECTOR_WAGES[i][1]),
       color: i => SECTOR_WAGES[i][1] < ONE_BR_INCOME ? '#c1462f' : C.blueDk
+    })
+  ]
+});
+
+/* ------------------------------------------------------------
+   Disability & housing
+   SSI: 2026 federal benefit rate, $994/mo (SSA). Affordable rent is
+   30% of that. The $1,966 one-bedroom is the same gross rent used in
+   the renting card above, so the two cards stay consistent.
+   ------------------------------------------------------------ */
+const SSI_MONTHLY   = 994;
+const SSI_AFFORD    = Math.round(SSI_MONTHLY * 0.30);   // 298
+const ONE_BR_GROSS  = RENT_ROWS[0].gross;               // 1966
+
+const DIS_SSI_ROWS = [
+  { label: ['Rent affordable', 'on SSI (30%)'], value: SSI_AFFORD,   color: C.coral,  note: '30% of a full SSI check' },
+  { label: ['Total monthly', 'SSI benefit'],    value: SSI_MONTHLY,  color: C.blue,   note: 'All income, not just housing' },
+  { label: ['Average 1 BR,', 'rent + utilities'], value: ONE_BR_GROSS, color: C.navy, note: '2024 Howard County Rental Survey' }
+];
+
+new Chart(document.getElementById('chartDisSSI'), {
+  type: 'bar',
+  data: {
+    labels: DIS_SSI_ROWS.map(r => r.label),
+    datasets: [{
+      label: 'Dollars per month',
+      data: DIS_SSI_ROWS.map(r => r.value),
+      backgroundColor: DIS_SSI_ROWS.map(r => r.color),
+      borderRadius: 3,
+      barPercentage: 0.62
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { top: 6, right: 74, bottom: 2 } },
+    scales: {
+      x: {
+        beginAtZero: true, max: 2000,
+        grid: { color: C.border },
+        /* Monthly dollars are too small for usdK(), which would round
+           $500 and $1,500 both into duplicate "$1K" ticks. */
+        ticks: { stepSize: 500, callback: v => usd(v) }
+      },
+      y: { grid: { display: false }, ticks: { font: { size: 11.5 } } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: c => ' ' + usd(c.parsed.x) + '/mo',
+          afterLabel: c => '  ' + DIS_SSI_ROWS[c.dataIndex].note
+        }
+      }
+    }
+  },
+  plugins: [
+    endLabelPlugin({
+      key: 'DisSSI',
+      halo: '#ffffff',
+      text: i => usd(DIS_SSI_ROWS[i].value),
+      color: i => DIS_SSI_ROWS[i].value === ONE_BR_GROSS ? C.navy : (i === 0 ? '#c1462f' : C.blueDk)
+    })
+  ]
+});
+
+/* Annual income by source against the income a one-bedroom requires.
+   SSI is annualized from the federal benefit rate; the earnings figures
+   are ACS 2024 5-year table S1811 (median earnings, population 16+ with
+   earnings) and are individual earnings, not household income. */
+const DIS_EARN_ROWS = [
+  { label: ['SSI, full year'],                        value: 11928 },
+  { label: ['Median earnings,', 'with a disability'], value: 51315 },
+  { label: ['Median earnings,', 'no disability'],     value: 79543 }
+];
+/* Compact labels for phones, where the full ones get truncated. */
+const DIS_EARN_SHORT = [
+  ['SSI, full year'],
+  ['Earnings, with', 'a disability'],
+  ['Earnings, no', 'disability']
+];
+
+new Chart(document.getElementById('chartDisEarn'), {
+  type: 'bar',
+  data: {
+    labels: DIS_EARN_ROWS.map(r => r.label),
+    datasets: [{
+      label: 'Annual income',
+      data: DIS_EARN_ROWS.map(r => r.value),
+      backgroundColor: DIS_EARN_ROWS.map(r => r.value < ONE_BR_INCOME ? C.coral : C.blue),
+      borderRadius: 3,
+      barPercentage: 0.62
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { top: 22, right: 74, bottom: 2 } },
+    scales: {
+      x: {
+        beginAtZero: true, max: 100000,
+        grid: { color: C.border },
+        ticks: { stepSize: 20000, callback: v => usdK(v) }
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          font: { size: 11.5 },
+          callback: function (v, i) {
+            return this.chart.width < 480 ? DIS_EARN_SHORT[i] : DIS_EARN_ROWS[i].label;
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: c => ' ' + usd(c.parsed.x) + ' a year',
+          afterLabel: c => {
+            const g = c.parsed.x - ONE_BR_INCOME;
+            return g < 0 ? '  ' + usd(-g) + ' short of a one-bedroom'
+                         : '  ' + usd(g) + ' above a one-bedroom';
+          }
+        }
+      }
+    }
+  },
+  plugins: [
+    refLinePlugin(ONE_BR_INCOME, '1 bedroom needs ' + usd(ONE_BR_INCOME), C.navy),
+    endLabelPlugin({
+      key: 'DisEarn',
+      halo: '#fafaf8',
+      text: i => usd(DIS_EARN_ROWS[i].value),
+      color: i => DIS_EARN_ROWS[i].value < ONE_BR_INCOME ? '#c1462f' : C.blueDk
     })
   ]
 });
