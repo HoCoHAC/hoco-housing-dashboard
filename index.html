@@ -213,6 +213,27 @@
   .sw { width: 11px; height: 11px; border-radius: 2px; flex: 0 0 11px; }
   .sw.outline { background: #ececeb; border: 1.5px solid var(--navy); }
 
+  /* ---------- Renting card: by-bedroom cost table ---------- */
+  #renting .cost-table thead th {
+    padding: 6px 14px; background: none; border-bottom: none;
+    font-size: 12px; font-weight: 600; color: var(--muted);
+    text-align: right; letter-spacing: .02em; text-transform: uppercase;
+  }
+  #renting .cost-table thead td { background: none; border-bottom: none; }
+  #renting .cost-table tbody td:not(:first-child) {
+    text-align: right; font-weight: 500; white-space: nowrap;
+  }
+  #renting .cost-table tbody td:first-child { width: 46%; }
+  @media (max-width: 700px) {
+    #renting .cost-table { font-size: 13px; }
+    #renting .cost-table td { padding: 9px 9px; }
+    #renting .cost-table thead th { padding: 5px 9px; font-size: 11px; }
+    #renting .cost-table tbody td:first-child { width: 34%; }
+  }
+  #renting .rent-caption {
+    font-size: 12.5px; color: var(--muted); margin: 9px 0 0; line-height: 1.5;
+  }
+
   /* ---------- Methodology ---------- */
   #mihu .cost-table td:last-child { white-space: nowrap; }
   .meth-item { margin: 0 0 16px; }
@@ -271,6 +292,7 @@
     <div class="nav-inner">
       <a href="#key-metrics">Key Metrics</a>
       <a href="#homebuying">What It Takes to Buy</a>
+      <a href="#renting">What It Takes to Rent</a>
       <a href="#communities">By Community</a>
       <a href="#rental-gap">Affordable Rental Gap</a>
       <a href="#mihu">MIHU Program</a>
@@ -365,6 +387,74 @@
         <li>Insurance: $150/month, typical Howard County estimate. PMI: ~0.55% of loan annually, required with less than 20% down.</li>
         <li>Income required: total monthly housing cost at a 28% front-end debt-to-income ratio.</li>
         <li>Affordability context: <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">Comptroller of Maryland</a>, Howard County affordability profile.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ RENTING ============ -->
+  <section class="section" id="renting">
+    <h2 class="section-title">What It Takes to Rent an Average Apartment</h2>
+    <p class="section-sub">The same question from the renter's side: the household income needed to afford an average Howard County apartment without spending more than 30% of income on housing.</p>
+
+    <div class="buy-layout">
+      <div>
+        <div class="figure-block">
+          <div class="figure-label">Average two-bedroom, rent plus utilities</div>
+          <div class="figure-value tnum">$2,269<span style="font-size:17px;font-weight:500;color:var(--muted);letter-spacing:0">/mo</span></div>
+        </div>
+        <div class="figure-block">
+          <div class="figure-label">Annual income required</div>
+          <div class="figure-value hero-num tnum">$90,760</div>
+          <p class="figure-note">to rent the average two-bedroom &mdash; $2,055 in rent plus $214 in tenant-paid utilities &mdash; while keeping housing at 30% of gross income. That is <strong>75% of the area median income</strong>. A three-bedroom takes $114,400, or <strong>94% of the area median</strong>.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap sm"><canvas id="chartRentIncome" role="img" aria-label="Horizontal bar chart of the annual household income required to afford an average Howard County apartment at 30 percent of income: $78,640 for a one-bedroom, $90,760 for a two-bedroom, and $114,400 for a three-bedroom, against a median renter household income of $95,055."></canvas></div>
+        <table class="cost-table tnum">
+          <thead>
+            <tr><td></td><th scope="col">1 BR</th><th scope="col">2 BR</th><th scope="col">3 BR</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Average rent</td><td>$1,761</td><td>$2,055</td><td>$2,623</td></tr>
+            <tr><td>Tenant-paid utilities</td><td>$205</td><td>$214</td><td>$237</td></tr>
+            <tr class="total"><td>Gross monthly rent</td><td>$1,966</td><td>$2,269</td><td>$2,860</td></tr>
+          </tbody>
+        </table>
+        <p class="rent-caption">Based on 10,223 one-bedroom, 12,849 two-bedroom and 1,964 three-bedroom apartments in the surveyed inventory.</p>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The median Howard County renter household earns <strong>$95,055</strong> &mdash; enough for an average one- or two-bedroom, but <strong>$19,345 short</strong> of an average three-bedroom. Howard County has the highest median renter income in the region, and a family-sized apartment is still out of reach for a renter at the middle.</span>
+    </div>
+
+    <h3>What Howard County Jobs Pay</h3>
+    <p class="subcap">Average annual wage by sector, against the $78,640 a one-bedroom requires</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Average wage below the income a one-bedroom needs</span>
+        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> At or above it</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="chartRentWages" role="img" aria-label="Horizontal bar chart of average annual wage by Howard County employment sector in 2022, from Leisure and Hospitality at $26,368 to Information at $166,552, with a reference line at the $78,640 income a one-bedroom apartment requires. Five of eleven sectors fall below that line."></canvas></div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Five of the county's eleven employment sectors pay an average wage below the <strong>$78,640</strong> a one-bedroom requires &mdash; including <strong>Education and Health at $58,443</strong>, the sector that covers teachers, nurses and home health aides. Leisure and Hospitality averages $26,368, about a third of what a one-bedroom takes. A single average wage is not a household income, but it shows which kinds of work cannot reach an average rent on one paycheck.</span>
+    </div>
+
+    <div class="sources">
+      <strong>Sources &amp; assumptions</strong>
+      <ol>
+        <li>Rents: Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 24, &ldquo;Summary of Howard County Multifamily Rental Inventory,&rdquo; page 31</strong>. Countywide averages here are <strong>calculated for this dashboard</strong>, weighting the report's Upper Tier and Balance of Market average effective rents by the unit counts in the same table. The result reproduces the report's own published countywide weighted average of $1,979 to within $1 &mdash; the $1 difference is because studio (159) and four-bedroom (111) units are excluded here. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
+        <li><strong>Data vintage.</strong> The survey is a <strong>November 2023 field survey</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). It is the most recent published countywide rent survey, but these rents are roughly three years old and current rents are likely higher. This card does not move with the monthly refresh that updates the homebuying figures above.</li>
+        <li><strong>These are apartment rents, not all rental housing.</strong> Table 24 covers the surveyed multifamily inventory of about 25,300 units. Scattered-site rentals &mdash; roughly 10,300 single-family homes, townhomes and condominiums, or about 28% of the county's 36,901 renter households &mdash; are excluded and rent higher, averaging $2,547 in the same survey.</li>
+        <li>Utilities: the survey's &ldquo;effective rent&rdquo; is contract rent net of owner-paid utilities, with water, sewer and trash added back in. Reaching gross rent therefore requires adding the utilities a tenant pays directly. The allowances used here &mdash; $205 for one bedroom, $214 for two, $237 for three &mdash; are the survey's own figures from <strong>Table 23, page 29</strong>, and equal the all-electric total (heating, cooking, water heating and general electricity, excluding water, sewer and trash) in <strong>Table 25, &ldquo;2023 Howard County Section 8 Utility Allowances,&rdquo; page 33</strong>. All four bedroom sizes in Table 23 reconcile exactly to the Table 25 components.</li>
+        <li>Affordability standard: a unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of gross household income &mdash; the same standard used in the Affordable Rental Gap and Cost Burden sections below. Income required is gross monthly rent &times; 12 &divide; 0.30.</li>
+        <li>Area median income: HUD's 2023 median family income for the Baltimore-Columbia-Towson metro area, <strong>$121,700</strong>, as published in the survey's Table 23, page 29. Howard County is not a separate HUD income area.</li>
+        <li>Median renter household income of <strong>$95,055</strong> (and countywide median household income of $144,012): Esri 2024 estimates as reported in the <em>2024 Howard County Rental Survey</em>, pages 4 and 21. Not a Census figure.</li>
+        <li>Wages: average annual wage by sector, 2022, from the survey's &ldquo;Average Annual Wage by Sector 2022&rdquo; chart and <strong>Table 8, page 7</strong>, sourced to the <a href="https://www.bls.gov/cew/" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages</a>. Howard County's all-sector average wage that year was $82,016. These are 2022 wages compared against late-2023 rents; both come from the same report, and wages have since risen.</li>
       </ol>
     </div>
   </section>
@@ -639,6 +729,10 @@
           <p>The two-bedroom rent range uses Howard County Housing Commission Housing Choice Voucher payment standards rather than asking-rent estimates, because payment standards are an official, citable county benchmark set by bedroom count and ZIP code.</p>
         </div>
         <div class="meth-item">
+          <h4>Income needed to rent</h4>
+          <p>Average rents by bedroom size are calculated for this dashboard from Table 24, page 31 of the 2024 Howard County Rental Survey, weighting the report's Upper Tier and Balance of Market rents by unit counts; the method reproduces the report's own countywide average to within $1. Because the survey reports effective rent, the tenant-paid utility allowance from its Table 23 is added to reach gross rent, matching the affordability standard used elsewhere on this page. These are apartment rents only &mdash; scattered-site single-family rentals are excluded and rent higher. The survey is a November 2023 field survey and does not change with the monthly refresh.</p>
+        </div>
+        <div class="meth-item">
           <h4>Affordable rental gap</h4>
           <p>Taken verbatim from Table 64, &ldquo;Penetration Rate Analysis,&rdquo; page 93 of the 2024 Howard County Rental Survey. The report publishes supply, demand, and a penetration rate for each band; the shortage and surplus figures here are supply minus demand. The headline figure sums the three bands below 60% of area median income, which together represent the most deeply underserved renters.</p>
         </div>
@@ -743,6 +837,13 @@ function endLabelPlugin(opts) {
       meta.data.forEach((el, i) => {
         const text = opts.text(i);
         if (!text) return;
+        /* Optional halo keeps labels legible where a reference line crosses them. */
+        if (opts.halo) {
+          ctx.lineWidth = 3.5;
+          ctx.lineJoin = 'round';
+          ctx.strokeStyle = opts.halo;
+          ctx.strokeText(text, el.x + 7, el.y);
+        }
         ctx.fillStyle = opts.color ? opts.color(i) : C.muted;
         ctx.fillText(text, el.x + 7, el.y);
       });
@@ -804,6 +905,146 @@ new Chart(document.getElementById('chartBuyDonut'), {
       }
     }
   }
+});
+
+/* ============================================================
+   1b. Renting — income required by unit size, and sector wages
+   ============================================================ */
+/* 2024 Howard County Rental Survey, Table 24, p.31. Average effective rents are
+   unit-weighted across Upper Tier and Balance of Market. Utility allowances are
+   the survey's own Table 23 (p.29) figures, which reconcile exactly to the
+   all-electric components of Table 25 (p.33), excluding water/sewer/trash --
+   those are already inside the survey's effective-rent basis.
+   Income required = gross monthly rent x 12 / 0.30. */
+const RENT_ROWS = [
+  { br: '1 bedroom',  rent: 1761, util: 205, gross: 1966, income:  78640, units: 10223 },
+  { br: '2 bedrooms', rent: 2055, util: 214, gross: 2269, income:  90760, units: 12849 },
+  { br: '3 bedrooms', rent: 2623, util: 237, gross: 2860, income: 114400, units:  1964 }
+];
+const MEDIAN_RENTER_INCOME = 95055;   // Esri 2024, via survey pp.4, 21
+const ONE_BR_INCOME = RENT_ROWS[0].income;
+
+new Chart(document.getElementById('chartRentIncome'), {
+  type: 'bar',
+  data: {
+    labels: RENT_ROWS.map(r => r.br),
+    datasets: [{
+      label: 'Annual income required',
+      data: RENT_ROWS.map(r => r.income),
+      backgroundColor: RENT_ROWS.map(r =>
+        r.income > MEDIAN_RENTER_INCOME ? C.coral : C.blue),
+      borderRadius: 3,
+      barPercentage: 0.62
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { top: 22, right: 78, bottom: 2 } },
+    scales: {
+      x: {
+        beginAtZero: true, max: 125000,
+        grid: { color: C.border },
+        ticks: { callback: v => usdK(v), maxTicksLimit: 6 }
+      },
+      y: { grid: { display: false } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: c => c[0].label,
+          label: c => ' Income required: ' + usd(c.parsed.x),
+          afterLabel: c => '  Gross rent ' + usd(RENT_ROWS[c.dataIndex].gross) + '/mo'
+        }
+      }
+    }
+  },
+  plugins: [
+    refLinePlugin(MEDIAN_RENTER_INCOME, 'Median renter ' + usd(MEDIAN_RENTER_INCOME), C.navy),
+    endLabelPlugin({
+      key: 'RentInc',
+      halo: '#ffffff',
+      text: i => usd(RENT_ROWS[i].income),
+      color: i => RENT_ROWS[i].income > MEDIAN_RENTER_INCOME ? '#c1462f' : C.blueDk
+    })
+  ]
+});
+
+/* Average annual wage by sector, Howard County, 2022. Survey "Average Annual
+   Wage by Sector 2022" chart + Table 8, p.7 (BLS QCEW). Verified as the Howard
+   County series, not the national one: the report states the county was above
+   national averages for seven of eleven sectors, and exactly seven of these
+   eleven exceed their paired national figure. */
+/* Compact labels swapped in when the plot area is too narrow for full names,
+   which otherwise get truncated on phones. */
+const SECTOR_SHORT = [
+  'Leisure & Hosp.', 'Nat. Resources', 'Other', 'Educ. & Health',
+  'Trade & Transp.', 'Manufacturing', 'Government', 'Construction',
+  'Financial', 'Prof. & Business', 'Information'
+];
+const SECTOR_WAGES = [
+  ['Leisure & Hospitality',        26368],
+  ['Natural Resources & Mining',   51848],
+  ['Other',                        52182],
+  ['Education & Health',           58443],
+  ['Trade, Transp. & Utilities',   69474],
+  ['Manufacturing',                81852],
+  ['Government',                   83971],
+  ['Construction',                 84726],
+  ['Financial Activities',        104709],
+  ['Professional & Business',     113970],
+  ['Information',                 166552]
+];
+
+new Chart(document.getElementById('chartRentWages'), {
+  type: 'bar',
+  data: {
+    labels: SECTOR_WAGES.map(s => s[0]),
+    datasets: [{
+      label: 'Average annual wage',
+      data: SECTOR_WAGES.map(s => s[1]),
+      backgroundColor: SECTOR_WAGES.map(s => s[1] < ONE_BR_INCOME ? C.coral : C.blue),
+      borderRadius: 3,
+      barPercentage: 0.8
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    layout: { padding: { top: 22, right: 70, bottom: 2 } },
+    scales: {
+      x: {
+        beginAtZero: true, max: 175000,
+        grid: { color: C.border },
+        ticks: { callback: v => usdK(v), maxTicksLimit: 6 }
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          autoSkip: false,
+          font: { size: 11.5 },
+          callback: function (v, i) {
+            const narrow = this.chart.width < 620;
+            return narrow ? SECTOR_SHORT[i] : SECTOR_WAGES[i][0];
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: c => ' Average wage: ' + usd(c.parsed.x) }
+      }
+    }
+  },
+  plugins: [
+    refLinePlugin(ONE_BR_INCOME, '1 bedroom needs ' + usd(ONE_BR_INCOME), C.navy),
+    endLabelPlugin({
+      key: 'Wages',
+      halo: '#fafaf8',
+      text: i => usd(SECTOR_WAGES[i][1]),
+      color: i => SECTOR_WAGES[i][1] < ONE_BR_INCOME ? '#c1462f' : C.blueDk
+    })
+  ]
 });
 
 /* ============================================================
