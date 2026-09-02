@@ -197,6 +197,16 @@
   .sources li { margin: 3px 0; }
   .src-line { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
 
+  /* ---------- Full source list ---------- */
+  #sources .src-group h3 { margin: 22px 0 0; }
+  #sources .src-group:first-of-type h3 { margin-top: 4px; }
+  #sources .src-group ol {
+    margin: 7px 0 0; padding-left: 20px;
+    font-size: 12.5px; color: var(--muted);
+  }
+  #sources .src-group li { margin: 4px 0; }
+  #sources .src-group strong { color: var(--text); font-weight: 600; }
+
   /* ---------- Charts ---------- */
   .chart-wrap { position: relative; height: 300px; margin: 6px 0 2px; }
   .chart-wrap.sm { height: 250px; }
@@ -291,12 +301,13 @@
       <a href="#homebuying">Buying</a>
       <a href="#renting">Renting</a>
       <a href="#communities">By Community</a>
-      <a href="#rental-gap">Affordable Rental Gap</a>
-      <a href="#mihu">MIHU Program</a>
+      <a href="#rental-gap">Rental Gap</a>
       <a href="#cost-burden">Cost Burden</a>
       <a href="#disparities">Disparities by Race</a>
       <a href="#disability">Disability</a>
+      <a href="#mihu">MIHU Program</a>
       <a href="#methodology">Methodology</a>
+      <a href="#sources">Sources</a>
     </div>
   </nav>
 
@@ -325,13 +336,6 @@
       </div>
     </div>
 
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol>
-        <li>Realtor.com, <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a> &mdash; median listing price and price per square foot, retrieved August 3, 2026.</li>
-        <li>Howard County Housing Commission, <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a> &mdash; effective January 1, 2026.</li>
-      </ol>
-    </div>
   </section>
 
   <!-- ============ HOMEBUYING ============ -->
@@ -376,17 +380,6 @@
       <span><strong>From the Comptroller of Maryland:</strong> Howard County is among the least affordable counties in Maryland for first-time homebuyers, with home prices well above the statewide median and monthly ownership costs among the highest in the state.</span>
     </div>
 
-    <div class="sources">
-      <strong>Sources &amp; assumptions</strong>
-      <ol>
-        <li>Home price: Realtor.com <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County median listing price</a>, $685,000 (retrieved August 3, 2026). Loan amount $616,500 after 10% down.</li>
-        <li>Rate: Freddie Mac <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">PMMS</a> 30-year fixed, 6.66% (week ending July 30, 2026), amortized over 360 months.</li>
-        <li>Property tax: 1.014% effective combined Howard County and State of Maryland rate, per <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">Howard County Department of Finance</a>.</li>
-        <li>Insurance: $150/month, typical Howard County estimate. PMI: ~0.55% of loan annually, required with less than 20% down.</li>
-        <li>Income required: total monthly housing cost at a 28% front-end debt-to-income ratio.</li>
-        <li>Affordability context: <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">Comptroller of Maryland</a>, Howard County affordability profile.</li>
-      </ol>
-    </div>
   </section>
 
   <!-- ============ RENTING ============ -->
@@ -442,19 +435,6 @@
       <span>Five of the county's eleven employment sectors pay an average wage below the <strong>$78,640</strong> a one-bedroom requires &mdash; including <strong>Education and Health at $58,443</strong>, the sector that covers teachers, nurses and home health aides. Leisure and Hospitality averages $26,368, about a third of what a one-bedroom takes. A single average wage is not a household income, but it shows which kinds of work cannot reach an average rent on one paycheck.</span>
     </div>
 
-    <div class="sources">
-      <strong>Sources &amp; assumptions</strong>
-      <ol>
-        <li>Rents: Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 24, &ldquo;Summary of Howard County Multifamily Rental Inventory,&rdquo; page 31</strong>. Countywide averages here are <strong>calculated for this dashboard</strong>, weighting the report's Upper Tier and Balance of Market average effective rents by the unit counts in the same table. The result reproduces the report's own published countywide weighted average of $1,979 to within $1 &mdash; the $1 difference is because studio (159) and four-bedroom (111) units are excluded here. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
-        <li><strong>Data vintage.</strong> The survey is a <strong>November 2023 field survey</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). It is the most recent published countywide rent survey, but these rents are roughly three years old and current rents are likely higher. This card does not move with the monthly refresh that updates the homebuying figures above.</li>
-        <li><strong>These are apartment rents, not all rental housing.</strong> Table 24 covers the surveyed multifamily inventory of about 25,300 units. Scattered-site rentals &mdash; roughly 10,300 single-family homes, townhomes and condominiums, or about 28% of the county's 36,901 renter households &mdash; are excluded and rent higher, averaging $2,547 in the same survey.</li>
-        <li>Utilities: the survey's &ldquo;effective rent&rdquo; is contract rent net of owner-paid utilities, with water, sewer and trash added back in. Reaching gross rent therefore requires adding the utilities a tenant pays directly. The allowances used here &mdash; $205 for one bedroom, $214 for two, $237 for three &mdash; are the survey's own figures from <strong>Table 23, page 29</strong>, and equal the all-electric total (heating, cooking, water heating and general electricity, excluding water, sewer and trash) in <strong>Table 25, &ldquo;2023 Howard County Section 8 Utility Allowances,&rdquo; page 33</strong>. All four bedroom sizes in Table 23 reconcile exactly to the Table 25 components.</li>
-        <li>Affordability standard: a unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of gross household income &mdash; the same standard used in the Affordable Rental Gap and Cost Burden sections below. Income required is gross monthly rent &times; 12 &divide; 0.30.</li>
-        <li>Area median income: HUD's 2023 median family income for the Baltimore-Columbia-Towson metro area, <strong>$121,700</strong>, as published in the survey's Table 23, page 29. Howard County is not a separate HUD income area.</li>
-        <li>Median renter household income of <strong>$95,055</strong> (and countywide median household income of $144,012): Esri 2024 estimates as reported in the <em>2024 Howard County Rental Survey</em>, pages 4 and 21. Not a Census figure.</li>
-        <li>Wages: average annual wage by sector, 2022, from the survey's &ldquo;Average Annual Wage by Sector 2022&rdquo; chart and <strong>Table 8, page 7</strong>, sourced to the <a href="https://www.bls.gov/cew/" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages</a>. Howard County's all-sector average wage that year was $82,016. These are 2022 wages compared against late-2023 rents; both come from the same report, and wages have since risen.</li>
-      </ol>
-    </div>
   </section>
 
   <!-- ============ BY COMMUNITY ============ -->
@@ -476,10 +456,6 @@
       <p class="src-line" id="srcCommOwn"></p>
     </div>
 
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol id="commSources"></ol>
-    </div>
   </section>
 
   <!-- ============ AFFORDABLE RENTAL GAP ============ -->
@@ -500,15 +476,118 @@
       <span>Across the three bands below 60% AMI, <strong>12,627 renter households</strong> are chasing just <strong>4,518 affordable homes</strong> &mdash; a shortage of <strong>8,109 homes</strong>, or roughly one affordable home for every three households that need one. Above 60% AMI the picture reverses for the moderate- and high-rent bands, then flips back to a shortage for the highest-earning renters.</span>
     </div>
 
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol>
-        <li>Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 64, &ldquo;Penetration Rate Analysis,&rdquo; page 93</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). Demand is the table's &ldquo;Estimated No. of Qualifying Renter Hhlds&rdquo;; supply is its &ldquo;Inventory Serving this Band.&rdquo; Total renter households countywide: 36,901. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
-        <li>The report publishes a penetration rate (supply &divide; demand), not a gap. The shortage and surplus figures shown here are supply minus demand, calculated from the table's own counts. The 12,627 / 4,518 / 8,109 sub-60% figures are the sum of the table's three lowest rows &mdash; the report's narrative gives slightly different totals in two places (4,479 units on page 92 and 4,519 in the executive summary), an inconsistency it does not reconcile.</li>
-        <li>A unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of household income, using HUD's 2023 median family income of $121,700 for the Baltimore-Columbia-Towson metro area. Units are classified <strong>by their rent level across the whole surveyed stock</strong> &mdash; not by whether an income-qualified household actually occupies them. The report notes the high-rent surplus means those units are &ldquo;serving renter households from other income bands.&rdquo;</li>
-        <li>Two limits the report states directly: the income bands overlap, because a band's floor is set by one-bedroom rents and its ceiling by three-bedroom rents, so a household can qualify for two bands depending on its size; and scattered-site rentals (10,300 of the 36,901 units) are modeled from a 13% sample rather than counted. The band inventory rows sum to 36,716 against a stated 36,901-unit universe, leaving 185 units unexplained.</li>
-      </ol>
+  </section>
+
+  <!-- ============ COST BURDEN ============ -->
+  <section class="section" id="cost-burden">
+    <h2 class="section-title">Housing Cost Burdens for Renters and Homeowners</h2>
+    <p class="section-sub">A household is cost-burdened if it spends more than 30% of gross income on housing costs.</p>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0">Renter Cost Burden</h3>
+        <div class="chart-wrap sm"><canvas id="chartBurdenRent" role="img" aria-label="Donut chart of renter households by cost burden: 17,522 not burdened, 8,309 moderately burdened, 7,672 severely burdened."></canvas></div>
+        <div class="callout">
+          <span class="ico" aria-hidden="true">&#9432;</span>
+          <span><strong>47.7% of renters are cost-burdened</strong> (~15,981 households)</span>
+        </div>
+        <p class="src-line">Universe: 33,503 renter households paying cash rent.</p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">Owner Cost Burden (w/ Mortgage)</h3>
+        <div class="chart-wrap sm"><canvas id="chartBurdenOwn" role="img" aria-label="Donut chart of owner households with a mortgage by cost burden: 48,785 not burdened, 8,100 moderately burdened, 5,410 severely burdened."></canvas></div>
+        <div class="callout">
+          <span class="ico" aria-hidden="true">&#9432;</span>
+          <span><strong>21.7% of owners with mortgages are cost-burdened</strong> (~13,510 households)</span>
+        </div>
+        <p class="src-line">Universe: 62,295 owner households with a mortgage.</p>
+      </div>
     </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Nearly half of Howard County renters &mdash; about <strong>16,000 households</strong> &mdash; spend more than 30% of gross income on housing, more than double the rate among homeowners with a mortgage.</span>
+    </div>
+
+  </section>
+
+  <!-- ============ DISPARITIES ============ -->
+  <section class="section" id="disparities">
+    <h2 class="section-title">Housing Cost Burdens by Race &amp; Ethnicity</h2>
+    <p class="section-sub">The same cost burden falls unevenly across Howard County households.</p>
+
+    <div class="legend">
+      <span><i class="sw" style="background:var(--gold)" aria-hidden="true"></i> Moderate (30&ndash;50% of income)</span>
+      <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Severe (&gt;50% of income)</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0">Renter Cost Burden by Race &amp; Ethnicity</h3>
+        <div class="chart-wrap md"><canvas id="chartRaceRent" role="img" aria-label="Stacked bar chart of renter cost burden by race and ethnicity: Hispanic or Latino 57 percent, Other or multiple 48 percent, Black 46 percent, Asian 44 percent, White non-Hispanic 35 percent."></canvas></div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">Homeowner Cost Burden by Race &amp; Ethnicity</h3>
+        <p class="subcap">All owner-occupied households, with or without a mortgage.</p>
+        <div class="chart-wrap md"><canvas id="chartRaceOwn" role="img" aria-label="Stacked bar chart of homeowner cost burden by race and ethnicity: Black 24 percent, Other or multiple 20 percent, Asian 19 percent, Hispanic or Latino 15 percent, White non-Hispanic 15 percent."></canvas></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Among renters, <strong>57% of Hispanic or Latino households</strong> are cost-burdened (1,535 of 2,680), compared with 35% of White non-Hispanic households &mdash; a 22-point gap. Among homeowners, Black households are burdened at <strong>24%</strong> (2,830 of 11,815) versus 15% for White non-Hispanic households.</span>
+    </div>
+
+  </section>
+
+  <!-- ============ DISABILITY & HOUSING ============ -->
+  <section class="section" id="disability">
+    <h2 class="section-title">Renting on a Disability Income</h2>
+    <p class="section-sub">About 28,952 Howard County residents live with a disability &mdash; 8.7% of the population, and 24.2% of those aged 65 and over. For the 3,881 residents whose income is a federal disability check rather than a paycheck, the distance between income and rent is the widest gap on this dashboard.</p>
+
+    <div class="buy-layout">
+      <div>
+        <div class="figure-block">
+          <div class="figure-label">Maximum monthly SSI benefit, 2026</div>
+          <div class="figure-value tnum">$994<span style="font-size:17px;font-weight:500;color:var(--muted);letter-spacing:0">/mo</span></div>
+        </div>
+        <div class="figure-block">
+          <div class="figure-label">Monthly shortfall on an average one-bedroom</div>
+          <div class="figure-value hero-num tnum">$1,668</div>
+          <p class="figure-note">Holding rent to the standard 30% of income leaves <strong>$298 a month</strong> out of a full SSI check. An average Howard County one-bedroom costs <strong>$1,966</strong> including tenant-paid utilities. The rent alone is <strong>198% of the entire benefit</strong> &mdash; before food, medicine or transportation.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap sm"><canvas id="chartDisSSI" role="img" aria-label="Horizontal bar chart comparing what a person living on Supplemental Security Income can pay for rent with what rent costs in Howard County: $298 affordable at 30 percent of the benefit, a $994 total monthly benefit, and $1,966 for an average one-bedroom including utilities."></canvas></div>
+        <p class="rent-caption">SSI is the federal benefit for people with disabilities who have almost no income or assets. Maryland adds a state supplement only in licensed care homes and assisted-living settings &mdash; not for someone renting an apartment on their own.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The Technical Assistance Collaborative's <em>Priced Out</em> analysis puts a one-bedroom at <strong>152% of SSI</strong> across the Baltimore-Columbia-Towson metro area and <strong>168%</strong> statewide. Howard County comes out higher &mdash; <strong>198%</strong> &mdash; because county rents run above the metro-wide average the national study uses. And $994 is the <em>maximum</em>: the average SSI payment actually received in Maryland is <strong>$718.98</strong>, which would put an average one-bedroom at 273% of income.</span>
+    </div>
+
+    <h3>Earnings, Not Just Benefits</h3>
+    <p class="subcap">Annual income by source, against the $78,640 a one-bedroom requires</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Below the income a one-bedroom needs</span>
+        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> At or above it</span>
+      </div>
+      <div class="chart-wrap sm"><canvas id="chartDisEarn" role="img" aria-label="Horizontal bar chart of annual income in Howard County against the $78,640 a one-bedroom requires: $11,928 a year on Supplemental Security Income, median earnings of $51,315 for workers with a disability, and $79,543 for workers without a disability."></canvas></div>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Most people with disabilities are not living on SSI &mdash; but working does not close the gap either. Median earnings for a Howard County worker with a disability are <strong>$51,315</strong>, about <strong>65 cents for every dollar</strong> earned by a worker without one, and <strong>$27,325 short</strong> of the income an average one-bedroom takes. Workers without a disability clear that bar by <strong>$903</strong>. Poverty runs <strong>12.6%</strong> among residents with a disability against <strong>4.5%</strong> without.</span>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>Because no wage or benefit at these levels reaches an average rent, subsidy is the only bridge &mdash; and it is scarce. Maryland reported roughly <strong>4,000 people waiting</strong> for affordable, accessible housing in FY2025 against a statewide Section 811 portfolio of <strong>319 units</strong>. Howard County's own recent additions are counted in the dozens: 19 units at Patuxent Commons, 9 at Robinson Overlook and 6 at The Marlow. The Housing Commission's Housing Choice Voucher waiting list is closed.</span>
+    </div>
+
   </section>
 
   <!-- ============ MIHU ============ -->
@@ -613,164 +692,6 @@
       <span><strong>Supply is shrinking while prices climb.</strong> For-sale awards fell from 50 in FY2024 to 16 in FY2026, a <strong>68% drop</strong> in two years. Over the same period the average new MIHU townhome rose 15% and the average MIHU rent rose 19%. Across 2018&ndash;2025 the program awarded 287 homes &mdash; about <strong>36 a year</strong> against an estimated countywide shortfall of roughly 20,000 affordable units.</span>
     </div>
 
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol>
-        <li>Howard County Department of Housing and Community Development, <a href="https://www.howardcountymd.gov/housing-community-development/moderate-income-housing-unit-mihu" target="_blank" rel="noopener">MIHU program overview</a>, <a href="https://www.howardcountymd.gov/DHCD-MIHU-Program" target="_blank" rel="noopener">MIHU Homeownership Program</a> (buyer income limits effective January 1, 2026), and <a href="https://www.howardcountymd.gov/DHCD-MIHU-Rental" target="_blank" rel="noopener">MIHU rental program</a> (renter income limits effective January 1, 2026).</li>
-        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-04/13.402%28j%29%20-%202025%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2025 MIHU Annual Analysis</a> &mdash; CY2025 applicants, eligibility, awards, average prices and rents, and rental inventory.</li>
-        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2025-06/13.402%28j%29%20-%202024%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2024 MIHU Annual Analysis</a> &mdash; CY2024 applicants, eligibility, awards, and average prices and rents.</li>
-        <li>Howard County, <a href="https://dash.howardcountymd.gov/who-can-afford-buy-home-howard-county" target="_blank" rel="noopener">Who Can Afford to Buy a Home in Howard County</a> &mdash; the County's own "about 1 in 10 applicants" statement.</li>
-        <li>Howard County Code, <a href="https://library.municode.com/md/howard_county/codes/code_of_ordinances?nodeId=HOCOCO_TIT13HOCODE_SUBTITLE_4MOINHOUN" target="_blank" rel="noopener">Title 13, Subtitle 4</a> &mdash; &sect;&nbsp;13.403 pricing and rent formulas, &sect;&nbsp;13.404 resale price cap, &sect;&nbsp;13.405 perpetual rental restrictions, &sect;&nbsp;13.406 eligibility and priorities.</li>
-        <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-05/FY27%20Budget%20Presentation%20-%20Housing.%202026.05.11.pdf" target="_blank" rel="noopener">FY27 Budget Presentation</a> (FY26 awards, 287 homes 2018&ndash;2025, perpetual affordability) and <a href="https://cc.howardcountymd.gov/sites/default/files/2025-05/2025.05.14%20Housing%20FY26%20Budget%20Presentation.pdf" target="_blank" rel="noopener">FY26 Budget Presentation</a> (FY25 awards).</li>
-        <li>Howard County, <a href="https://cc.howardcountymd.gov/sites/default/files/2024-04/FY2025%20Executives%20Proposed%20Operating%20Budget%20Book.pdf" target="_blank" rel="noopener">FY2025 Executive's Proposed Operating Budget</a> &mdash; FY24 awards.</li>
-        <li>Market comparisons: <a href="https://www.redfin.com/county/1322/MD/Howard-County/housing-market" target="_blank" rel="noopener">Redfin Howard County median sale price</a>, $628,000 (May 2026); <em>2024 Howard County Rental Survey</em> countywide average market rent of $1,979 and 2BR market average of $2,135.</li>
-        <li>Unmet-need estimate of roughly 20,000 units: Housing Affordability Coalition <a href="https://www.acshoco.org/wp-content/uploads/2021/09/HCBD-HAC-Draft-Plan-Comments_9.14.2021.pdf" target="_blank" rel="noopener">comments on the draft Housing Opportunities Master Plan</a>, September 14, 2021, citing the County's consultant study.</li>
-        <li>Percentages comparing MIHU prices and rents with market figures, and shares of eligible applicants served, are calculated from the sourced values above. The purchase comparison is not a matched pair: the MIHU figure covers new townhomes in CY2025 while the market median covers all home types in May 2026.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ COST BURDEN ============ -->
-  <section class="section" id="cost-burden">
-    <h2 class="section-title">Housing Cost Burdens for Renters and Homeowners</h2>
-    <p class="section-sub">A household is cost-burdened if it spends more than 30% of gross income on housing costs.</p>
-
-    <div class="grid-2">
-      <div class="panel">
-        <h3 style="margin-top:0">Renter Cost Burden</h3>
-        <div class="chart-wrap sm"><canvas id="chartBurdenRent" role="img" aria-label="Donut chart of renter households by cost burden: 17,522 not burdened, 8,309 moderately burdened, 7,672 severely burdened."></canvas></div>
-        <div class="callout">
-          <span class="ico" aria-hidden="true">&#9432;</span>
-          <span><strong>47.7% of renters are cost-burdened</strong> (~15,981 households)</span>
-        </div>
-        <p class="src-line">Source: Census ACS 2020&ndash;2024 5-year (B25070). Universe: 33,503 renter households paying rent.</p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0">Owner Cost Burden (w/ Mortgage)</h3>
-        <div class="chart-wrap sm"><canvas id="chartBurdenOwn" role="img" aria-label="Donut chart of owner households with a mortgage by cost burden: 48,785 not burdened, 8,100 moderately burdened, 5,410 severely burdened."></canvas></div>
-        <div class="callout">
-          <span class="ico" aria-hidden="true">&#9432;</span>
-          <span><strong>21.7% of owners with mortgages are cost-burdened</strong> (~13,510 households)</span>
-        </div>
-        <p class="src-line">Source: Census ACS 2020&ndash;2024 5-year (B25091). Universe: 62,295 owner households with a mortgage.</p>
-      </div>
-    </div>
-
-    <div class="callout navy">
-      <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>Nearly half of Howard County renters &mdash; about <strong>16,000 households</strong> &mdash; spend more than 30% of gross income on housing, more than double the rate among homeowners with a mortgage.</span>
-    </div>
-
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol>
-        <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25070&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25070</a> &mdash; gross rent as a percentage of household income.</li>
-        <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25091&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25091</a> &mdash; mortgage status by selected monthly owner costs as a percentage of household income.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ DISPARITIES ============ -->
-  <section class="section" id="disparities">
-    <h2 class="section-title">Housing Cost Burdens by Race &amp; Ethnicity</h2>
-    <p class="section-sub">The same cost burden falls unevenly across Howard County households.</p>
-
-    <div class="legend">
-      <span><i class="sw" style="background:var(--gold)" aria-hidden="true"></i> Moderate (30&ndash;50% of income)</span>
-      <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Severe (&gt;50% of income)</span>
-    </div>
-
-    <div class="grid-2">
-      <div class="panel">
-        <h3 style="margin-top:0">Renter Cost Burden by Race &amp; Ethnicity</h3>
-        <div class="chart-wrap md"><canvas id="chartRaceRent" role="img" aria-label="Stacked bar chart of renter cost burden by race and ethnicity: Hispanic or Latino 57 percent, Other or multiple 48 percent, Black 46 percent, Asian 44 percent, White non-Hispanic 35 percent."></canvas></div>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0">Homeowner Cost Burden by Race &amp; Ethnicity</h3>
-        <p class="subcap">All owner-occupied households, with or without a mortgage.</p>
-        <div class="chart-wrap md"><canvas id="chartRaceOwn" role="img" aria-label="Stacked bar chart of homeowner cost burden by race and ethnicity: Black 24 percent, Other or multiple 20 percent, Asian 19 percent, Hispanic or Latino 15 percent, White non-Hispanic 15 percent."></canvas></div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>Among renters, <strong>57% of Hispanic or Latino households</strong> are cost-burdened (1,535 of 2,680), compared with 35% of White non-Hispanic households &mdash; a 22-point gap. Among homeowners, Black households are burdened at <strong>24%</strong> (2,830 of 11,815) versus 15% for White non-Hispanic households.</span>
-    </div>
-
-    <div class="sources">
-      <strong>Sources</strong>
-      <ol>
-        <li>U.S. Department of Housing and Urban Development, <a href="https://www.huduser.gov/portal/datasets/cp.html" target="_blank" rel="noopener">Comprehensive Housing Affordability Strategy (CHAS) data</a>, 2018&ndash;2022 release (published December 23, 2025), <strong>Table 9</strong> &mdash; tenure by race and ethnicity of householder by cost burden, Howard County, Maryland (<a href="https://www.huduser.gov/portal/datasets/cp/2018thru2022-050-csv.zip">county-level CSV</a>, GEOID 0500000US24027). Percentages are calculated from the published household counts; hover any bar for the underlying counts.</li>
-        <li>Denominator is all households in each group, including the small number for whom cost burden was not computed (no or negative income). CHAS rounds household counts to the nearest 5, so shares carry roughly &plusmn;0.2 percentage points of rounding noise.</li>
-        <li><strong>Note on vintage:</strong> CHAS is built on ACS 2018&ndash;2022 5-year estimates, an earlier period than the ACS 2020&ndash;2024 estimates used in the countywide cost-burden card above. HUD has not yet released a CHAS edition based on 2020&ndash;2024 data, so the two cards are not directly comparable and the countywide totals differ slightly.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ DISABILITY & HOUSING ============ -->
-  <section class="section" id="disability">
-    <h2 class="section-title">Renting on a Disability Income</h2>
-    <p class="section-sub">About 28,952 Howard County residents live with a disability &mdash; 8.7% of the population, and 24.2% of those aged 65 and over. For the 3,881 residents whose income is a federal disability check rather than a paycheck, the distance between income and rent is the widest gap on this dashboard.</p>
-
-    <div class="buy-layout">
-      <div>
-        <div class="figure-block">
-          <div class="figure-label">Maximum monthly SSI benefit, 2026</div>
-          <div class="figure-value tnum">$994<span style="font-size:17px;font-weight:500;color:var(--muted);letter-spacing:0">/mo</span></div>
-        </div>
-        <div class="figure-block">
-          <div class="figure-label">Monthly shortfall on an average one-bedroom</div>
-          <div class="figure-value hero-num tnum">$1,668</div>
-          <p class="figure-note">Holding rent to the standard 30% of income leaves <strong>$298 a month</strong> out of a full SSI check. An average Howard County one-bedroom costs <strong>$1,966</strong> including tenant-paid utilities. The rent alone is <strong>198% of the entire benefit</strong> &mdash; before food, medicine or transportation.</p>
-        </div>
-      </div>
-      <div>
-        <div class="chart-wrap sm"><canvas id="chartDisSSI" role="img" aria-label="Horizontal bar chart comparing what a person living on Supplemental Security Income can pay for rent with what rent costs in Howard County: $298 affordable at 30 percent of the benefit, a $994 total monthly benefit, and $1,966 for an average one-bedroom including utilities."></canvas></div>
-        <p class="rent-caption">SSI is the federal benefit for people with disabilities who have almost no income or assets. Maryland adds a state supplement only in licensed care homes and assisted-living settings &mdash; not for someone renting an apartment on their own.</p>
-      </div>
-    </div>
-
-    <div class="callout">
-      <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>The Technical Assistance Collaborative's <em>Priced Out</em> analysis puts a one-bedroom at <strong>152% of SSI</strong> across the Baltimore-Columbia-Towson metro area and <strong>168%</strong> statewide. Howard County comes out higher &mdash; <strong>198%</strong> &mdash; because county rents run above the metro-wide average the national study uses. And $994 is the <em>maximum</em>: the average SSI payment actually received in Maryland is <strong>$718.98</strong>, which would put an average one-bedroom at 273% of income.</span>
-    </div>
-
-    <h3>Earnings, Not Just Benefits</h3>
-    <p class="subcap">Annual income by source, against the $78,640 a one-bedroom requires</p>
-    <div class="panel">
-      <div class="legend">
-        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Below the income a one-bedroom needs</span>
-        <span><i class="sw" style="background:var(--blue)" aria-hidden="true"></i> At or above it</span>
-      </div>
-      <div class="chart-wrap sm"><canvas id="chartDisEarn" role="img" aria-label="Horizontal bar chart of annual income in Howard County against the $78,640 a one-bedroom requires: $11,928 a year on Supplemental Security Income, median earnings of $51,315 for workers with a disability, and $79,543 for workers without a disability."></canvas></div>
-    </div>
-
-    <div class="callout navy">
-      <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>Most people with disabilities are not living on SSI &mdash; but working does not close the gap either. Median earnings for a Howard County worker with a disability are <strong>$51,315</strong>, about <strong>65 cents for every dollar</strong> earned by a worker without one, and <strong>$27,325 short</strong> of the income an average one-bedroom takes. Workers without a disability clear that bar by <strong>$903</strong>. Poverty runs <strong>12.6%</strong> among residents with a disability against <strong>4.5%</strong> without.</span>
-    </div>
-
-    <div class="callout">
-      <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>Because no wage or benefit at these levels reaches an average rent, subsidy is the only bridge &mdash; and it is scarce. Maryland reported roughly <strong>4,000 people waiting</strong> for affordable, accessible housing in FY2025 against a statewide Section 811 portfolio of <strong>319 units</strong>. Howard County's own recent additions are counted in the dozens: 19 units at Patuxent Commons, 9 at Robinson Overlook and 6 at The Marlow. The Housing Commission's Housing Choice Voucher waiting list is closed.</span>
-    </div>
-
-    <div class="sources">
-      <strong>Sources &amp; assumptions</strong>
-      <ol>
-        <li>SSI benefit: the 2026 federal benefit rate for an eligible individual, <strong>$994 per month</strong> ($11,928 a year), from the <a href="https://www.ssa.gov/oact/cola/SSI.html" target="_blank" rel="noopener">Social Security Administration, SSI Federal Payment Amounts</a>, effective January 2026. This is the maximum; countable income reduces it.</li>
-        <li>Average payment actually received in Maryland, <strong>$718.98</strong> (December 2025): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_asr/2025/sect02.html" target="_blank" rel="noopener">SSA, <em>SSI Annual Statistical Report, 2025</em>, Table 11</a>.</li>
-        <li>Maryland's optional state supplement is paid only to people living in care homes, assisted living facilities and rehabilitative residences, and is not available to someone renting independently: <a href="https://www.ssa.gov/policy/docs/progdesc/ssi_st_asst/2011/md.html" target="_blank" rel="noopener">SSA, State Assistance Programs for SSI Recipients &mdash; Maryland</a>, and <a href="https://dhs.maryland.gov/weathering-tough-times/public-assistance-adults/" target="_blank" rel="noopener">Maryland Department of Human Services, Public Assistance to Adults</a>. Current-year supplement amounts are not published in a single place; the 2011 schedule is the most recent detailed table located.</li>
-        <li>Howard County SSI recipients, <strong>3,881</strong> in December 2025 (1,299 aged; 2,582 blind and disabled; 550 under 18, 1,677 aged 18&ndash;64, 1,654 aged 65 and over): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_sc/2025/md.html" target="_blank" rel="noopener">SSA, <em>SSI Recipients by State and County, 2025</em>, Table 3</a>. County figures cover federally administered payments only. SSA does not publish a county average payment, and dividing county payments by recipients overstates it, so no county average is shown here.</li>
-        <li>Rent: the <strong>$1,966</strong> gross one-bedroom is the same figure used in the renting section above &mdash; $1,761 average effective rent plus $205 in tenant-paid utilities, calculated for this dashboard from the <em>2024 Howard County Rental Survey</em>, Tables 23 and 24. It is a <strong>November 2023</strong> field survey, so current rents are likely higher and the gap correspondingly wider.</li>
-        <li>Comparison figures for the metro area and the state: <a href="https://www.tacinc.org/resources/priced-out/" target="_blank" rel="noopener">Technical Assistance Collaborative, <em>Priced Out</em></a>, 2026 edition, which uses HUD's revised FY2026 Fair Market Rents as a proxy for local rents. TAC does not publish a Howard County row; the 198% figure on this page is calculated here from the county's own surveyed rent, and is not TAC's. TAC's finding is that there is &ldquo;no United States housing market in which a person living solely on Supplemental Security Income (SSI) can afford a safe, decent apartment without rental assistance.&rdquo;</li>
-        <li>Disability population and age breakdown: <a href="https://planning.maryland.gov/MSDC/SiteAssets/ACS_Tables/1-Year/2024/Reports/CNTY_24027_ACS_2024.aspx" target="_blank" rel="noopener">Maryland Department of Planning, Howard County American Community Survey profile</a>, <strong>ACS 2024 1-year</strong>, confirmed against Census table S1810. 28,952 of 334,399 civilian noninstitutionalized residents (&plusmn;3,458).</li>
-        <li>Median earnings and poverty by disability status: Census table <strong>S1811, ACS 2024 5-year</strong> &mdash; median earnings for the population 16 and over with earnings, $51,315 with a disability and $79,543 without; poverty 12.6% and 4.5%. The 1-year release of S1811 is not published for Howard County, so this is a five-year average and covers a different, much larger population than the SSI figures above. Earnings are individual earnings, not household income.</li>
-        <li>Waiting list and Section 811 units: <a href="https://dlslibrary.state.md.us/publications/Exec/MDOD/HU7-113(f)_2025.pdf" target="_blank" rel="noopener">Maryland Department of Disabilities, <em>State Disabilities Plan Progress Analysis, FY2025 Annual Report</em></a> (November 2025), pages 6&ndash;7: &ldquo;In Fiscal Year 2025, around 4,000 people were on the waitlist for affordable, accessible housing,&rdquo; against 319 total Section 811 units statewide, 297 of them occupied. MDOD publishes program and waiting-list data but not income data for people with disabilities.</li>
-        <li>Local units: <a href="https://www.howardcountymd.gov/News110525b" target="_blank" rel="noopener">Howard County, Patuxent Commons announcement</a> (19 of 76 units for low-income residents with disabilities) and <a href="https://www.howardcountymd.gov/News081826" target="_blank" rel="noopener">Howard County, August 2026 release</a> (six accessible and affordable units at The Marlow, with an accessibility-prioritized wait list); <a href="https://dhcd.maryland.gov/HousingDevelopment/Documents/section811/RobinsonOverlook-TenantSelectionCriteria.pdf" target="_blank" rel="noopener">Maryland DHCD, Robinson Overlook resident selection plan</a>, page 2 (eight Section 811 units plus one Weinberg unit in Columbia). These are the units this dashboard could verify from published sources, not a county inventory &mdash; no countywide count of accessible affordable units is published. Voucher waiting list status: <a href="https://househoward.org/commission-housing-programs/" target="_blank" rel="noopener">Howard County Housing Commission</a>.</li>
-        <li>This card does not move with the monthly refresh that updates the homebuying figures above. The SSI benefit changes each January; the ACS figures change annually.</li>
-      </ol>
-    </div>
   </section>
 
   <!-- ============ METHODOLOGY ============ -->
@@ -833,17 +754,117 @@
       </div>
     </div>
 
-    <div class="sources">
-      <strong>Full source list</strong>
+  </section>
+
+  <!-- ============ FULL SOURCE LIST ============ -->
+  <section class="section" id="sources">
+    <h2 class="section-title">Full Source List</h2>
+    <p class="section-sub">Every source cited on this dashboard, grouped by the card it supports. Notes on calculation and data vintage are kept with each source.</p>
+
+    <div class="src-group">
+      <h3>Key Metrics at a Glance</h3>
       <ol>
-        <li>Realtor.com &mdash; <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a>.</li>
-        <li>Freddie Mac &mdash; <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Primary Mortgage Market Survey</a>.</li>
-        <li>Howard County Housing Commission &mdash; <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a>, effective January 1, 2026.</li>
-        <li>Real Property Research Group for the Howard County Housing Commission and DHCD &mdash; <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, Table 64, page 93.</li>
-        <li>U.S. Census Bureau &mdash; <a href="https://data.census.gov" target="_blank" rel="noopener">American Community Survey 5-Year Estimates</a>, Tables B19013, B25003, B25070, B25091.</li>
-        <li>U.S. Department of Housing and Urban Development &mdash; <a href="https://www.huduser.gov/portal/datasets/cp.html" target="_blank" rel="noopener">CHAS data, 2018&ndash;2022 release</a>, Table 9, and <a href="https://www.huduser.gov/portal/datasets/il.html" target="_blank" rel="noopener">FY2026 income limits</a>.</li>
-        <li>Howard County Department of Finance &mdash; <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">property tax rates</a>.</li>
-        <li>Comptroller of Maryland &mdash; <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">county affordability profile</a>.</li>
+      <li>Realtor.com, <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a> &mdash; median listing price and price per square foot, retrieved August 3, 2026.</li>
+      <li>Howard County Housing Commission, <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a> &mdash; effective January 1, 2026.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>What It Takes to Buy the Median-Priced Home</h3>
+      <ol>
+      <li>Home price: Realtor.com <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County median listing price</a>, $685,000 (retrieved August 3, 2026). Loan amount $616,500 after 10% down.</li>
+      <li>Rate: Freddie Mac <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">PMMS</a> 30-year fixed, 6.66% (week ending July 30, 2026), amortized over 360 months.</li>
+      <li>Property tax: 1.014% effective combined Howard County and State of Maryland rate, per <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">Howard County Department of Finance</a>.</li>
+      <li>Insurance: $150/month, typical Howard County estimate. PMI: ~0.55% of loan annually, required with less than 20% down.</li>
+      <li>Income required: total monthly housing cost at a 28% front-end debt-to-income ratio.</li>
+      <li>Affordability context: <a href="https://www.marylandtaxes.gov" target="_blank" rel="noopener">Comptroller of Maryland</a>, Howard County affordability profile.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>What It Takes to Rent an Average Apartment</h3>
+      <ol>
+      <li>Rents: Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 24, &ldquo;Summary of Howard County Multifamily Rental Inventory,&rdquo; page 31</strong>. Countywide averages here are <strong>calculated for this dashboard</strong>, weighting the report's Upper Tier and Balance of Market average effective rents by the unit counts in the same table. The result reproduces the report's own published countywide weighted average of $1,979 to within $1 &mdash; the $1 difference is because studio (159) and four-bedroom (111) units are excluded here. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
+      <li><strong>Data vintage.</strong> The survey is a <strong>November 2023 field survey</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). It is the most recent published countywide rent survey, but these rents are roughly three years old and current rents are likely higher. This card does not move with the monthly refresh that updates the homebuying figures above.</li>
+      <li><strong>These are apartment rents, not all rental housing.</strong> Table 24 covers the surveyed multifamily inventory of about 25,300 units. Scattered-site rentals &mdash; roughly 10,300 single-family homes, townhomes and condominiums, or about 28% of the county's 36,901 renter households &mdash; are excluded and rent higher, averaging $2,547 in the same survey.</li>
+      <li>Utilities: the survey's &ldquo;effective rent&rdquo; is contract rent net of owner-paid utilities, with water, sewer and trash added back in. Reaching gross rent therefore requires adding the utilities a tenant pays directly. The allowances used here &mdash; $205 for one bedroom, $214 for two, $237 for three &mdash; are the survey's own figures from <strong>Table 23, page 29</strong>, and equal the all-electric total (heating, cooking, water heating and general electricity, excluding water, sewer and trash) in <strong>Table 25, &ldquo;2023 Howard County Section 8 Utility Allowances,&rdquo; page 33</strong>. All four bedroom sizes in Table 23 reconcile exactly to the Table 25 components.</li>
+      <li>Affordability standard: a unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of gross household income &mdash; the same standard used in the Affordable Rental Gap and Cost Burden sections below. Income required is gross monthly rent &times; 12 &divide; 0.30.</li>
+      <li>Area median income: HUD's 2023 median family income for the Baltimore-Columbia-Towson metro area, <strong>$121,700</strong>, as published in the survey's Table 23, page 29. Howard County is not a separate HUD income area.</li>
+      <li>Median renter household income of <strong>$95,055</strong> (and countywide median household income of $144,012): Esri 2024 estimates as reported in the <em>2024 Howard County Rental Survey</em>, pages 4 and 21. Not a Census figure.</li>
+      <li>Wages: average annual wage by sector, 2022, from the survey's &ldquo;Average Annual Wage by Sector 2022&rdquo; chart and <strong>Table 8, page 7</strong>, sourced to the <a href="https://www.bls.gov/cew/" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages</a>. Howard County's all-sector average wage that year was $82,016. These are 2022 wages compared against late-2023 rents; both come from the same report, and wages have since risen.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Prices &amp; Homeownership by Community</h3>
+      <ol id="commSources"></ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Gap in Affordable Rental Housing by Income Level</h3>
+      <ol>
+      <li>Real Property Research Group for the Howard County Housing Commission and the Department of Housing and Community Development, <a href="https://howardcounty.librarycalendar.com/sites/default/files/2025-05/Howard%20County%20Rental%20Housing%20Survey.June%202024%20copy_0.pdf" target="_blank" rel="noopener"><em>2024 Howard County Rental Survey</em></a>, <strong>Table 64, &ldquo;Penetration Rate Analysis,&rdquo; page 93</strong> (cover dated February 2024; the copy DHCD distributes is labeled June 2024). Demand is the table's &ldquo;Estimated No. of Qualifying Renter Hhlds&rdquo;; supply is its &ldquo;Inventory Serving this Band.&rdquo; Total renter households countywide: 36,901. Linked from DHCD's <a href="https://www.howardcountymd.gov/housing-community-development/publications-reports" target="_blank" rel="noopener">Publications &amp; Reports</a> page.</li>
+      <li>The report publishes a penetration rate (supply &divide; demand), not a gap. The shortage and surplus figures shown here are supply minus demand, calculated from the table's own counts. The 12,627 / 4,518 / 8,109 sub-60% figures are the sum of the table's three lowest rows &mdash; the report's narrative gives slightly different totals in two places (4,479 units on page 92 and 4,519 in the executive summary), an inconsistency it does not reconcile.</li>
+      <li>A unit counts as affordable when gross rent (contract rent plus tenant-paid utilities) is 30% or less of household income, using HUD's 2023 median family income of $121,700 for the Baltimore-Columbia-Towson metro area. Units are classified <strong>by their rent level across the whole surveyed stock</strong> &mdash; not by whether an income-qualified household actually occupies them. The report notes the high-rent surplus means those units are &ldquo;serving renter households from other income bands.&rdquo;</li>
+      <li>Two limits the report states directly: the income bands overlap, because a band's floor is set by one-bedroom rents and its ceiling by three-bedroom rents, so a household can qualify for two bands depending on its size; and scattered-site rentals (10,300 of the 36,901 units) are modeled from a 13% sample rather than counted. The band inventory rows sum to 36,716 against a stated 36,901-unit universe, leaving 185 units unexplained.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Housing Cost Burdens for Renters and Homeowners</h3>
+      <ol>
+      <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25070&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25070</a> &mdash; gross rent as a percentage of household income.</li>
+      <li>U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25091&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25091</a> &mdash; mortgage status by selected monthly owner costs as a percentage of household income.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Housing Cost Burdens by Race &amp; Ethnicity</h3>
+      <ol>
+      <li>U.S. Department of Housing and Urban Development, <a href="https://www.huduser.gov/portal/datasets/cp.html" target="_blank" rel="noopener">Comprehensive Housing Affordability Strategy (CHAS) data</a>, 2018&ndash;2022 release (published December 23, 2025), <strong>Table 9</strong> &mdash; tenure by race and ethnicity of householder by cost burden, Howard County, Maryland (<a href="https://www.huduser.gov/portal/datasets/cp/2018thru2022-050-csv.zip">county-level CSV</a>, GEOID 0500000US24027). Percentages are calculated from the published household counts; hover any bar for the underlying counts.</li>
+      <li>Denominator is all households in each group, including the small number for whom cost burden was not computed (no or negative income). CHAS rounds household counts to the nearest 5, so shares carry roughly &plusmn;0.2 percentage points of rounding noise.</li>
+      <li><strong>Note on vintage:</strong> CHAS is built on ACS 2018&ndash;2022 5-year estimates, an earlier period than the ACS 2020&ndash;2024 estimates used in the countywide cost-burden card above. HUD has not yet released a CHAS edition based on 2020&ndash;2024 data, so the two cards are not directly comparable and the countywide totals differ slightly.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Renting on a Disability Income</h3>
+      <ol>
+      <li>SSI benefit: the 2026 federal benefit rate for an eligible individual, <strong>$994 per month</strong> ($11,928 a year), from the <a href="https://www.ssa.gov/oact/cola/SSI.html" target="_blank" rel="noopener">Social Security Administration, SSI Federal Payment Amounts</a>, effective January 2026. This is the maximum; countable income reduces it.</li>
+      <li>Average payment actually received in Maryland, <strong>$718.98</strong> (December 2025): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_asr/2025/sect02.html" target="_blank" rel="noopener">SSA, <em>SSI Annual Statistical Report, 2025</em>, Table 11</a>.</li>
+      <li>Maryland's optional state supplement is paid only to people living in care homes, assisted living facilities and rehabilitative residences, and is not available to someone renting independently: <a href="https://www.ssa.gov/policy/docs/progdesc/ssi_st_asst/2011/md.html" target="_blank" rel="noopener">SSA, State Assistance Programs for SSI Recipients &mdash; Maryland</a>, and <a href="https://dhs.maryland.gov/weathering-tough-times/public-assistance-adults/" target="_blank" rel="noopener">Maryland Department of Human Services, Public Assistance to Adults</a>. Current-year supplement amounts are not published in a single place; the 2011 schedule is the most recent detailed table located.</li>
+      <li>Howard County SSI recipients, <strong>3,881</strong> in December 2025 (1,299 aged; 2,582 blind and disabled; 550 under 18, 1,677 aged 18&ndash;64, 1,654 aged 65 and over): <a href="https://www.ssa.gov/policy/docs/statcomps/ssi_sc/2025/md.html" target="_blank" rel="noopener">SSA, <em>SSI Recipients by State and County, 2025</em>, Table 3</a>. County figures cover federally administered payments only. SSA does not publish a county average payment, and dividing county payments by recipients overstates it, so no county average is shown here.</li>
+      <li>Rent: the <strong>$1,966</strong> gross one-bedroom is the same figure used in the renting section above &mdash; $1,761 average effective rent plus $205 in tenant-paid utilities, calculated for this dashboard from the <em>2024 Howard County Rental Survey</em>, Tables 23 and 24. It is a <strong>November 2023</strong> field survey, so current rents are likely higher and the gap correspondingly wider.</li>
+      <li>Comparison figures for the metro area and the state: <a href="https://www.tacinc.org/resources/priced-out/" target="_blank" rel="noopener">Technical Assistance Collaborative, <em>Priced Out</em></a>, 2026 edition, which uses HUD's revised FY2026 Fair Market Rents as a proxy for local rents. TAC does not publish a Howard County row; the 198% figure on this page is calculated here from the county's own surveyed rent, and is not TAC's. TAC's finding is that there is &ldquo;no United States housing market in which a person living solely on Supplemental Security Income (SSI) can afford a safe, decent apartment without rental assistance.&rdquo;</li>
+      <li>Disability population and age breakdown: <a href="https://planning.maryland.gov/MSDC/SiteAssets/ACS_Tables/1-Year/2024/Reports/CNTY_24027_ACS_2024.aspx" target="_blank" rel="noopener">Maryland Department of Planning, Howard County American Community Survey profile</a>, <strong>ACS 2024 1-year</strong>, confirmed against Census table S1810. 28,952 of 334,399 civilian noninstitutionalized residents (&plusmn;3,458).</li>
+      <li>Median earnings and poverty by disability status: Census table <strong>S1811, ACS 2024 5-year</strong> &mdash; median earnings for the population 16 and over with earnings, $51,315 with a disability and $79,543 without; poverty 12.6% and 4.5%. The 1-year release of S1811 is not published for Howard County, so this is a five-year average and covers a different, much larger population than the SSI figures above. Earnings are individual earnings, not household income.</li>
+      <li>Waiting list and Section 811 units: <a href="https://dlslibrary.state.md.us/publications/Exec/MDOD/HU7-113(f)_2025.pdf" target="_blank" rel="noopener">Maryland Department of Disabilities, <em>State Disabilities Plan Progress Analysis, FY2025 Annual Report</em></a> (November 2025), pages 6&ndash;7: &ldquo;In Fiscal Year 2025, around 4,000 people were on the waitlist for affordable, accessible housing,&rdquo; against 319 total Section 811 units statewide, 297 of them occupied. MDOD publishes program and waiting-list data but not income data for people with disabilities.</li>
+      <li>Local units: <a href="https://www.howardcountymd.gov/News110525b" target="_blank" rel="noopener">Howard County, Patuxent Commons announcement</a> (19 of 76 units for low-income residents with disabilities) and <a href="https://www.howardcountymd.gov/News081826" target="_blank" rel="noopener">Howard County, August 2026 release</a> (six accessible and affordable units at The Marlow, with an accessibility-prioritized wait list); <a href="https://dhcd.maryland.gov/HousingDevelopment/Documents/section811/RobinsonOverlook-TenantSelectionCriteria.pdf" target="_blank" rel="noopener">Maryland DHCD, Robinson Overlook resident selection plan</a>, page 2 (eight Section 811 units plus one Weinberg unit in Columbia). These are the units this dashboard could verify from published sources, not a county inventory &mdash; no countywide count of accessible affordable units is published. Voucher waiting list status: <a href="https://househoward.org/commission-housing-programs/" target="_blank" rel="noopener">Howard County Housing Commission</a>.</li>
+      <li>This card does not move with the monthly refresh that updates the homebuying figures above. The SSI benefit changes each January; the ACS figures change annually.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Moderate Income Housing Unit (MIHU) Program</h3>
+      <ol>
+      <li>Howard County Department of Housing and Community Development, <a href="https://www.howardcountymd.gov/housing-community-development/moderate-income-housing-unit-mihu" target="_blank" rel="noopener">MIHU program overview</a>, <a href="https://www.howardcountymd.gov/DHCD-MIHU-Program" target="_blank" rel="noopener">MIHU Homeownership Program</a> (buyer income limits effective January 1, 2026), and <a href="https://www.howardcountymd.gov/DHCD-MIHU-Rental" target="_blank" rel="noopener">MIHU rental program</a> (renter income limits effective January 1, 2026).</li>
+      <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-04/13.402%28j%29%20-%202025%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2025 MIHU Annual Analysis</a> &mdash; CY2025 applicants, eligibility, awards, average prices and rents, and rental inventory.</li>
+      <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2025-06/13.402%28j%29%20-%202024%20DHCD%20MIHU%20Annual%20Analysis%20FINAL.pdf" target="_blank" rel="noopener">2024 MIHU Annual Analysis</a> &mdash; CY2024 applicants, eligibility, awards, and average prices and rents.</li>
+      <li>Howard County, <a href="https://dash.howardcountymd.gov/who-can-afford-buy-home-howard-county" target="_blank" rel="noopener">Who Can Afford to Buy a Home in Howard County</a> &mdash; the County's own "about 1 in 10 applicants" statement.</li>
+      <li>Howard County Code, <a href="https://library.municode.com/md/howard_county/codes/code_of_ordinances?nodeId=HOCOCO_TIT13HOCODE_SUBTITLE_4MOINHOUN" target="_blank" rel="noopener">Title 13, Subtitle 4</a> &mdash; &sect;&nbsp;13.403 pricing and rent formulas, &sect;&nbsp;13.404 resale price cap, &sect;&nbsp;13.405 perpetual rental restrictions, &sect;&nbsp;13.406 eligibility and priorities.</li>
+      <li>Howard County DHCD, <a href="https://cc.howardcountymd.gov/sites/default/files/2026-05/FY27%20Budget%20Presentation%20-%20Housing.%202026.05.11.pdf" target="_blank" rel="noopener">FY27 Budget Presentation</a> (FY26 awards, 287 homes 2018&ndash;2025, perpetual affordability) and <a href="https://cc.howardcountymd.gov/sites/default/files/2025-05/2025.05.14%20Housing%20FY26%20Budget%20Presentation.pdf" target="_blank" rel="noopener">FY26 Budget Presentation</a> (FY25 awards).</li>
+      <li>Howard County, <a href="https://cc.howardcountymd.gov/sites/default/files/2024-04/FY2025%20Executives%20Proposed%20Operating%20Budget%20Book.pdf" target="_blank" rel="noopener">FY2025 Executive's Proposed Operating Budget</a> &mdash; FY24 awards.</li>
+      <li>Market comparisons: <a href="https://www.redfin.com/county/1322/MD/Howard-County/housing-market" target="_blank" rel="noopener">Redfin Howard County median sale price</a>, $628,000 (May 2026); <em>2024 Howard County Rental Survey</em> countywide average market rent of $1,979 and 2BR market average of $2,135.</li>
+      <li>Unmet-need estimate of roughly 20,000 units: Housing Affordability Coalition <a href="https://www.acshoco.org/wp-content/uploads/2021/09/HCBD-HAC-Draft-Plan-Comments_9.14.2021.pdf" target="_blank" rel="noopener">comments on the draft Housing Opportunities Master Plan</a>, September 14, 2021, citing the County's consultant study.</li>
+      <li>Percentages comparing MIHU prices and rents with market figures, and shares of eligible applicants served, are calculated from the sourced values above. The purchase comparison is not a matched pair: the MIHU figure covers new townhomes in CY2025 while the market median covers all home types in May 2026.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Used throughout the dashboard</h3>
+      <ol>
+        <li>U.S. Census Bureau &mdash; <a href="https://data.census.gov" target="_blank" rel="noopener">American Community Survey 5-Year Estimates</a>, Tables B19013 (median household income) and B25003 (tenure), used for the countywide context figures.</li>
+        <li>U.S. Department of Housing and Urban Development &mdash; <a href="https://www.huduser.gov/portal/datasets/il.html" target="_blank" rel="noopener">FY2026 income limits</a>, used to express income thresholds as a share of area median income.</li>
       </ol>
     </div>
   </section>
