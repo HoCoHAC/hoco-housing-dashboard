@@ -219,6 +219,10 @@
   .legend span { display: inline-flex; align-items: center; gap: 7px; }
   .sw { width: 11px; height: 11px; border-radius: 2px; flex: 0 0 11px; }
   .sw.outline { background: #ececeb; border: 1.5px solid var(--navy); }
+  .sw.hatch {
+    background: repeating-linear-gradient(45deg, #dfe4ec 0 2.5px, var(--navy) 2.5px 4px);
+    border: 1px solid var(--border);
+  }
 
   /* ---------- Renting card: by-bedroom cost table ---------- */
   #renting .cost-table thead th {
@@ -237,7 +241,8 @@
     #renting .cost-table thead th { padding: 5px 9px; font-size: 11px; }
     #renting .cost-table tbody td:first-child { width: 34%; }
   }
-  #renting .rent-caption {
+  #renting .rent-caption,
+  #homelessness .hl-caption {
     font-size: 12.5px; color: var(--muted); margin: 9px 0 0; line-height: 1.5;
   }
 
@@ -303,9 +308,10 @@
       <a href="#communities">By Community</a>
       <a href="#rental-gap">Rental Gap</a>
       <a href="#cost-burden">Cost Burden</a>
-      <a href="#disparities">Disparities by Race</a>
+      <a href="#disparities">Disparities</a>
       <a href="#disability">Disability</a>
-      <a href="#mihu">MIHU Program</a>
+      <a href="#mihu">MIHU</a>
+      <a href="#homelessness">Homelessness</a>
       <a href="#methodology">Methodology</a>
       <a href="#sources">Sources</a>
     </div>
@@ -694,6 +700,69 @@
 
   </section>
 
+  <!-- ============ HOMELESSNESS ============ -->
+  <section class="section" id="homelessness">
+    <h2 class="section-title">Homelessness: The Path Toward Zero</h2>
+    <p class="section-sub">Howard County's homelessness data comes from the Coalition to End Homelessness, the county's HUD-designated Continuum of Care (CoC MD-504). Each January the CoC counts everyone sleeping in a shelter or outside on a single night &mdash; the point-in-time count. In November 2025 the County adopted <em>The Path Toward Zero</em>, a five-year plan to make homelessness &ldquo;rare, brief, and non-recurring&rdquo; by 2030.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="label">2025 Point-in-Time Count</div>
+        <div class="value tnum">147</div>
+        <div class="sub">People counted on the night of January 28, 2025 &mdash; up from 130 a year earlier</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Sleeping Unsheltered</div>
+        <div class="value tnum">51</div>
+        <div class="sub">35% of the count, down from 62 in 2024</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Average Time Homeless</div>
+        <div class="value tnum">163 days</div>
+        <div class="sub">Federal FY2024 &mdash; the highest in the ten years HUD has published</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Entries Over Exits, FY2025</div>
+        <div class="value tnum">+107</div>
+        <div class="sub">294 people entered the county system, 187 left it</div>
+      </div>
+    </div>
+
+    <h3>Who Was Counted, and Where They Slept</h3>
+    <p class="subcap">Point-in-time count by shelter status, 2015&ndash;2025</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--navy)" aria-hidden="true"></i> Sheltered</span>
+        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Unsheltered</span>
+        <span><i class="sw hatch" aria-hidden="true"></i> 2021: sheltered only &mdash; no unsheltered count</span>
+      </div>
+      <div class="chart-wrap md"><canvas id="chartHomelessPIT" role="img" aria-label="Stacked bar chart of the Howard County point-in-time homeless count from 2015 to 2025, divided into sheltered and unsheltered. Totals were 166 in 2015, 214 in 2016, 168 in 2017, 168 in 2018, 201 in 2019, 139 in 2020, a sheltered-only 82 in 2021, 165 in 2022, 145 in 2023, 130 in 2024 and 147 in 2025. The unsheltered count rose from 22 in 2022 to 62 in 2024 before falling to 51 in 2025. No unsheltered count was taken in 2021."></canvas></div>
+      <p class="hl-caption">* In 2021 HUD let communities cancel the unsheltered half of the count because of COVID-19 transmission risk, and Howard County did. That bar is hatched because it records sheltered residents only; it is not comparable with the years on either side, and the low figure also reflects the eviction moratorium and pandemic rental aid then in place. The 2022 count was taken late, on February 15.</p>
+    </div>
+
+    <div class="callout">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The sharpest disparity in the county's homelessness data is who experiences it. African American residents are <strong>21%</strong> of Howard County's population but <strong>59%</strong> of everyone counted in the point-in-time count. White residents are 24% of the count, and 11% are another race or multiracial.</span>
+    </div>
+
+    <h3>More People Entering Than Leaving</h3>
+    <p class="subcap">Entries into and exits from the county homeless system, fiscal years 2021&ndash;2025</p>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--coral)" aria-hidden="true"></i> Entered the system</span>
+        <span><i class="sw" style="background:var(--navy)" aria-hidden="true"></i> Exited the system</span>
+      </div>
+      <div class="chart-wrap md"><canvas id="chartHomelessFlow" role="img" aria-label="Grouped bar chart comparing entries into and exits from the Howard County homeless system by county fiscal year: 331 entries against 137 exits in FY2021, 381 against 169 in FY2022, 337 against 149 in FY2023, 305 against 156 in FY2024, and 294 against 187 in FY2025. Entries exceed exits in every year."></canvas></div>
+      <p class="hl-caption">County fiscal years run July to June, so FY2025 covers July 2024 through June 2025. Entries have fallen every year since FY2022 and exits are at a five-year high, but the gap between them has not closed.</p>
+    </div>
+
+    <div class="callout navy">
+      <span class="ico" aria-hidden="true">&#9432;</span>
+      <span>The plan defines its goal as <em>functional zero</em> &mdash; homelessness that is rare, brief and non-recurring &mdash; by 2030, and it does the arithmetic on what that takes. In FY2025 the county would have had to keep about <strong>100 more people</strong> from becoming homeless, or move <strong>100 more households</strong> into permanent housing, simply to bring entries and exits into balance. Roughly <strong>960 residents</strong> were active in county homeless programs that year.</span>
+    </div>
+
+  </section>
+
   <!-- ============ METHODOLOGY ============ -->
   <section class="section" id="methodology">
     <h2 class="section-title">Methodology &amp; Sources</h2>
@@ -742,6 +811,10 @@
         <div class="meth-item">
           <h4>Race and ethnicity</h4>
           <p>Cost burden by race and ethnicity uses HUD CHAS tabulations of ACS microdata, which cross tenure and cost burden with the race and ethnicity of the householder &mdash; a breakdown the published ACS tables do not provide. Because the current CHAS release is built on ACS 2018&ndash;2022, that card runs two years behind the ACS 2020&ndash;2024 figures used elsewhere, and its homeowner series covers all owner-occupied households rather than only those with a mortgage.</p>
+        </div>
+        <div class="meth-item">
+          <h4>Homelessness counts and fiscal years</h4>
+          <p>Point-in-time figures are HUD's published counts for Continuum of Care MD-504. The count is a single-night census, so it measures how many people are homeless at one moment rather than over a year: HUD's annual records for federal FY2024 list 295 people, against a January count of 130. Two fiscal years appear in this card. HUD's system performance measures run October to September, and federal FY2024 is the most recent one published. The entry and exit figures come from <em>The Path Toward Zero</em> and run July to June, so its FY2025 is the county's. The plan also reports an average self-reported length of time unhoused of 245 days; that is a five-year average which counts time before someone contacts county services, and it is not comparable to HUD's 163-day measure. Because MD-504's counts run in the tens, year-to-year moves in small subgroups sit within methodological noise and are not charted here.</p>
         </div>
         <div class="meth-item">
           <h4>Refresh cadence</h4>
@@ -857,6 +930,19 @@
       <li>Market comparisons: <a href="https://www.redfin.com/county/1322/MD/Howard-County/housing-market" target="_blank" rel="noopener">Redfin Howard County median sale price</a>, $628,000 (May 2026); <em>2024 Howard County Rental Survey</em> countywide average market rent of $1,979 and 2BR market average of $2,135.</li>
       <li>Unmet-need estimate of roughly 20,000 units: Housing Affordability Coalition <a href="https://www.acshoco.org/wp-content/uploads/2021/09/HCBD-HAC-Draft-Plan-Comments_9.14.2021.pdf" target="_blank" rel="noopener">comments on the draft Housing Opportunities Master Plan</a>, September 14, 2021, citing the County's consultant study.</li>
       <li>Percentages comparing MIHU prices and rents with market figures, and shares of eligible applicants served, are calculated from the sourced values above. The purchase comparison is not a matched pair: the MIHU figure covers new townhomes in CY2025 while the market median covers all home types in May 2026.</li>
+      </ol>
+    </div>
+
+    <div class="src-group">
+      <h3>Homelessness: The Path Toward Zero</h3>
+      <ol>
+      <li>U.S. Department of Housing and Urban Development, <a href="https://www.huduser.gov/portal/sites/default/files/xls/2007-2025-PIT-Counts-by-CoC.xlsb" target="_blank" rel="noopener">2007&ndash;2025 Point-in-Time Counts by CoC</a> &mdash; the MD-504 sheltered and unsheltered series charted here, retrieved September 1, 2026.</li>
+      <li>HUD CoC population and subpopulation reports for MD-504, which corroborate every annual total by shelter type &mdash; <a href="https://files.hudexchange.info/reports/published/CoC_PopSub_CoC_MD-504-2025_MD_2025.pdf" target="_blank" rel="noopener">2025</a> (147 total, 96 sheltered, 51 unsheltered, count taken January 28, 2025), <a href="https://files.hudexchange.info/reports/published/CoC_PopSub_CoC_MD-504-2024_MD_2024.pdf" target="_blank" rel="noopener">2024</a>, and <a href="https://files.hudexchange.info/reports/published/CoC_PopSub_CoC_MD-504-2021_MD_2021.pdf" target="_blank" rel="noopener">2021</a>, which prints an em dash in every unsheltered cell.</li>
+      <li>HUD, <a href="https://files.hudexchange.info/reports/published/CoC_Perf_CoC_MD-504-2024_MD_2024.pdf" target="_blank" rel="noopener">CoC Performance Profile, MD-504, FY2024</a> &mdash; average length of time homeless of 163 days, median of 101 days, and HUD's statement of the 2021 unsheltered suppression.</li>
+      <li>HUD, <a href="https://files.hudexchange.info/resources/documents/System-Performance-Measures-Data-Since-FY-2015.xlsx" target="_blank" rel="noopener">CoC System Performance Measures data since FY2015</a> &mdash; the FY2015&ndash;FY2024 series behind the ten-year comparison, and the annual count of 295 people cited in the Methodology note.</li>
+      <li>Howard County, <a href="https://www.howardcountymd.gov/sites/default/files/2025-11/The%20Path%20Toward%20Zero%202025-2030.pdf" target="_blank" rel="noopener">The Path Toward Zero 2025&ndash;2030</a>, adopted November 19, 2025 &mdash; system entries and exits, p.&nbsp;20; the 100-person gap to functional zero, p.&nbsp;20; 960 active participants, p.&nbsp;22; the 59% and 21% racial comparison, p.&nbsp;19; the functional-zero goal, p.&nbsp;9; the 245-day self-reported average, p.&nbsp;21.</li>
+      <li>Howard County, <a href="https://www.howardcountymd.gov/homeless-services/coalition-end-homelessness-continuum-care" target="_blank" rel="noopener">Coalition to End Homelessness &mdash; Continuum of Care</a> &mdash; CoC governance and the Division of Homeless Services as lead agency.</li>
+      <li>Note on vintage: 2025 is the most recent point-in-time count HUD has published for MD-504, and federal FY2024 the most recent system performance measures; HUD has published no 2026 CoC-level count. The Coalition publishes no dashboard or annual report of its own, so all figures here are taken from HUD and from Howard County.</li>
       </ol>
     </div>
 
@@ -1831,6 +1917,167 @@ new Chart(document.getElementById('chartMihuTrend'), {
       chart.getDatasetMeta(0).data.forEach((el, i) => {
         ctx.fillStyle = i === 2 ? '#c1462f' : C.navy;
         ctx.fillText(num(MIHU_TREND[i].awards), el.x, el.y - 6);
+      });
+      ctx.restore();
+    }
+  }]
+});
+/* ============================================================
+   12. Homelessness — point-in-time count and system flow
+   ============================================================ */
+const PIT = [
+  { yr: '2015', sh: 123, un:   43 },
+  { yr: '2016', sh: 205, un:    9 },
+  { yr: '2017', sh: 115, un:   53 },
+  { yr: '2018', sh: 125, un:   43 },
+  { yr: '2019', sh: 129, un:   72 },
+  { yr: '2020', sh:  99, un:   40 },
+  { yr: '2021', sh:  82, un: null },   /* unsheltered count cancelled — COVID-19 */
+  { yr: '2022', sh: 143, un:   22 },
+  { yr: '2023', sh: 112, un:   33 },
+  { yr: '2024', sh:  68, un:   62 },
+  { yr: '2025', sh:  96, un:   51 }
+];
+PIT.forEach(r => { r.total = r.sh + (r.un || 0); });
+const PIT_NC = PIT.findIndex(r => r.un === null);
+
+/* Seamless 45-degree hatch, used to mark the non-comparable 2021 bar. */
+function hatchPattern(bg, line) {
+  const t = document.createElement('canvas');
+  const S = 8;
+  t.width = S; t.height = S;
+  const x = t.getContext('2d');
+  x.fillStyle = bg;
+  x.fillRect(0, 0, S, S);
+  x.strokeStyle = line;
+  x.lineWidth = 1.7;
+  [-S, 0, S].forEach(o => {
+    x.beginPath();
+    x.moveTo(o, S);
+    x.lineTo(o + S, 0);
+    x.stroke();
+  });
+  return x.createPattern(t, 'repeat');
+}
+
+new Chart(document.getElementById('chartHomelessPIT'), {
+  type: 'bar',
+  data: {
+    labels: PIT.map(r => r.yr),
+    datasets: [
+      {
+        label: 'Sheltered',
+        data: PIT.map(r => r.sh),
+        backgroundColor: PIT.map((r, i) =>
+          i === PIT_NC ? hatchPattern('#dfe4ec', C.navy) : C.navy),
+        borderRadius: 2,
+        barPercentage: 0.62,
+        categoryPercentage: 0.82
+      },
+      {
+        label: 'Unsheltered',
+        data: PIT.map(r => r.un),
+        backgroundColor: C.coral,
+        borderRadius: 2,
+        barPercentage: 0.62,
+        categoryPercentage: 0.82
+      }
+    ]
+  },
+  options: {
+    layout: { padding: { top: 26, right: 8, left: 4 } },
+    scales: {
+      x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11.5 } } },
+      y: {
+        stacked: true, beginAtZero: true, suggestedMax: 230,
+        title: { display: true, text: 'People counted on a single night', font: { size: 11.5, weight: '500' } },
+        grid: { color: '#f0f0ec' },
+        ticks: { precision: 0 }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: c => ' ' + c.dataset.label + ': ' + num(c.parsed.y),
+          afterBody: c => c[0].dataIndex === PIT_NC
+            ? 'Sheltered only — no unsheltered count was taken in 2021.'
+            : 'Total: ' + num(PIT[c[0].dataIndex].total)
+        }
+      }
+    }
+  },
+  plugins: [{
+    id: 'pitTotals',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = '600 12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      PIT.forEach((r, i) => {
+        /* On 2021 the unsheltered bar has no value, so measure from the sheltered one. */
+        const el = chart.getDatasetMeta(r.un === null ? 0 : 1).data[i];
+        if (!el) return;
+        ctx.fillStyle = C.navy;
+        ctx.fillText(num(r.total) + (r.un === null ? '*' : ''), el.x, el.y - 6);
+      });
+      ctx.restore();
+    }
+  }]
+});
+
+const FLOW = [
+  { fy: 'FY2021', ent: 331, ex: 137 },
+  { fy: 'FY2022', ent: 381, ex: 169 },
+  { fy: 'FY2023', ent: 337, ex: 149 },
+  { fy: 'FY2024', ent: 305, ex: 156 },
+  { fy: 'FY2025', ent: 294, ex: 187 }
+];
+
+new Chart(document.getElementById('chartHomelessFlow'), {
+  type: 'bar',
+  data: {
+    labels: FLOW.map(r => r.fy),
+    datasets: [
+      { label: 'Entered', data: FLOW.map(r => r.ent), backgroundColor: C.coral, borderRadius: 3, barPercentage: 0.78, categoryPercentage: 0.66 },
+      { label: 'Exited',  data: FLOW.map(r => r.ex),  backgroundColor: C.navy,  borderRadius: 3, barPercentage: 0.78, categoryPercentage: 0.66 }
+    ]
+  },
+  options: {
+    layout: { padding: { top: 26, right: 8, left: 4 } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: {
+        beginAtZero: true, suggestedMax: 430,
+        title: { display: true, text: 'People', font: { size: 11.5, weight: '500' } },
+        grid: { color: '#f0f0ec' },
+        ticks: { precision: 0 }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: c => ' ' + c.dataset.label + ': ' + num(c.parsed.y),
+          afterBody: c => 'Net into the system: +' + num(FLOW[c[0].dataIndex].ent - FLOW[c[0].dataIndex].ex)
+        }
+      }
+    }
+  },
+  plugins: [{
+    id: 'flowLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = '600 11.5px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      [0, 1].forEach(di => {
+        ctx.fillStyle = di === 0 ? '#c1462f' : C.navy;
+        chart.getDatasetMeta(di).data.forEach((el, i) => {
+          ctx.fillText(num(di === 0 ? FLOW[i].ent : FLOW[i].ex), el.x, el.y - 5);
+        });
       });
       ctx.restore();
     }
