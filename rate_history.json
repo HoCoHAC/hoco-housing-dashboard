@@ -17,5 +17,43 @@
       "divergence_pct": -0.94
     },
     "action": "hold"
+  },
+  {
+    "checked": "2026-08-05",
+    "displayed_rate": 6.66,
+    "displayed_week": "July 30, 2026",
+    "observed_rate": 6.66,
+    "observed_week": "7/30/2026",
+    "gap": 0.0,
+    "threshold": 0.25,
+    "rate_crossed": false,
+    "displayed_price": 685000.0,
+    "observed_price": 685000.0,
+    "price_changed": false,
+    "crosscheck": {
+      "reference": 657475.0,
+      "month": "202607",
+      "divergence_pct": 4.19
+    },
+    "action": "hold"
+  },
+  {
+    "checked": "2026-09-05",
+    "displayed_rate": 6.66,
+    "displayed_week": "July 30, 2026",
+    "observed_rate": 6.71,
+    "observed_week": "9/3/2026",
+    "gap": 0.05,
+    "threshold": 0.25,
+    "rate_crossed": false,
+    "displayed_price": 685000.0,
+    "observed_price": 657475.0,
+    "price_changed": true,
+    "crosscheck": {
+      "reference": 625500.0,
+      "month": "202608",
+      "divergence_pct": 5.11
+    },
+    "action": "update"
   }
 ]
