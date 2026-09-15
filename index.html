@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="chart.umd.min.js" integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4" crossorigin="anonymous"></script>
 <style>
   :root {
     --navy: #192744;
@@ -871,7 +871,12 @@
 
     <div class="src-group">
       <h3>Prices &amp; Homeownership by Community</h3>
-      <ol id="commSources"></ol>
+      <ol id="commSources">
+        <li>Median listing prices: Realtor.com place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>, retrieved July 31, 2026. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475, retrieved September 5, 2026.</li>
+        <li>Listing-price comparability: reporting months are not stated for every community, so the values may not reflect the same month. The county reference line and community bars both use Realtor.com listing prices. They are a separately dated snapshot, not the HCAR median sold price used in Key Metrics and homebuying; do not interpret the difference as a price change or a local sale-to-list ratio.</li>
+        <li>Homeownership rates: U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places. County average: 71.5%.</li>
+        <li>Homeownership geography and sample size: Clarksville and West Friendship have no Census place record and cannot be charted; their ZIP-code areas (21029 and 21794) run 93.6% and 99.5%, but cover broader rural territory. Lisbon rests on just 29 occupied units, so read it as near-universal owner occupancy.</li>
+      </ol>
     </div>
 
     <div class="src-group">
@@ -1397,12 +1402,9 @@ const COMMUNITY_OWN = {
   ]
 };
 
-document.getElementById('commSources').innerHTML = [
-  '<li>Median listing prices: Realtor.com place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>, retrieved July 31, 2026. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475, retrieved September 5, 2026.</li>',
-  '<li>Listing-price comparability: reporting months are not stated for every community, so the values may not reflect the same month. The county reference line and community bars both use Realtor.com listing prices. They are a separately dated snapshot, not the HCAR median sold price used in Key Metrics and homebuying; do not interpret the difference as a price change or a local sale-to-list ratio.</li>',
-  '<li>Homeownership rates: U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places. County average: 71.5%.</li>',
-  '<li>Homeownership geography and sample size: Clarksville and West Friendship have no Census place record and cannot be charted; their ZIP-code areas (21029 and 21794) run 93.6% and 99.5%, but cover broader rural territory. Lisbon rests on just 29 occupied units, so read it as near-universal owner occupancy.</li>'
-].join('');
+// Community source notes are rendered directly into the HTML above so they
+// remain visible if the chart library fails to load. Keep this in sync with
+// the fallback markup at the #commSources <ol>.
 
 if (COMMUNITY_PRICE) {
   const d = COMMUNITY_PRICE;

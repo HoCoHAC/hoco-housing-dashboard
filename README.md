@@ -17,6 +17,7 @@ Maintained by the [Housing Affordability Coalition of Howard County](https://www
 | `logo-hac.png` | Coalition logo used in the header. |
 | `index-offline.html` | Identical dashboard with zero external requests. Works with no internet connection. |
 | `chart.umd.min.js` | Chart.js 4.4.1, bundled locally so the offline version can render its charts. |
+| `make_pdf.py` | Builds a dated PDF from the current offline dashboard, checks all charts, blocks external requests, and refuses to overwrite an existing snapshot. |
 
 There is no build step, no framework, and no server. `index.html` is plain HTML, CSS, and JavaScript, and all figures are written directly into the file.
 
@@ -47,7 +48,7 @@ Two things to keep in mind:
 
 ## Data sources
 
-All figures come from public government and industry sources. Each card on the dashboard carries its own source list with direct links; the primary ones are:
+All figures come from public government and industry sources. The Full Source List at the bottom groups direct links and caveats in card order; the primary sources are:
 
 - [HUD Comprehensive Housing Affordability Strategy (CHAS)](https://www.huduser.gov/portal/datasets/cp.html) — 2018–2022 release, Table 9, for cost burden by race and ethnicity
 - [U.S. Census Bureau American Community Survey](https://data.census.gov) — tables B25003, B25070, and B25091, 2020–2024 5-year estimates
