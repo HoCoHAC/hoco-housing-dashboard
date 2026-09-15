@@ -1,0 +1,17 @@
+{
+  "source": "HCAR / Bright MLS",
+  "metric": "median_sold_price",
+  "geography": "Howard County, Maryland",
+  "period": "2026-08",
+  "price": 639000,
+  "verification_price": 639000,
+  "verification_period": "2026-08",
+  "report_url": "https://www.hcar.org/clientuploads/PDF%20Files/Housing_Stats/2026_Housing_Stats/August/August_2026_Detailed_Report_(1).pdf",
+  "verification_url": "https://www.hcar.org/clientuploads/PDF%20Files/Housing_Stats/2026_Housing_Stats/August/August_2026_Local_Market_Insight_Report.pdf",
+  "discovery_url": "https://www.hcar.org/pages/monthly-stats/",
+  "statistics_calculated": "2026-09-04",
+  "retrieved": "2026-09-15",
+  "closed_sales": 329,
+  "verification_method": "Visual inspection of both original HCAR report PDFs; also matched current HCAR monthly statistics page. Overall monthly median, not average ($696,828) or year-to-date ($630,000).",
+  "migration_note": "Replaces Realtor.com median listing price with HCAR median sold price. This is a definition and source change, not a measured market-price decline."
+}

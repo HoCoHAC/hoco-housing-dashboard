@@ -53,10 +53,23 @@ All figures come from public government and industry sources. Each card on the d
 - [U.S. Census Bureau American Community Survey](https://data.census.gov) — tables B25003, B25070, and B25091, 2020–2024 5-year estimates
 - [Howard County Rental Housing Survey, June 2024](https://www.howardcountymd.gov/housing-community-development/publications-reports) — Real Property Research Group, Table 64, for the rental supply gap
 - [Freddie Mac Primary Mortgage Market Survey](https://www.freddiemac.com/pmms) — weekly 30-year fixed mortgage rate
-- [Realtor.com market data](https://www.realtor.com/local/market/maryland/howard-county) — median listing prices, county and by community
+- [HCAR Monthly Stats](https://www.hcar.org/pages/monthly-stats/): monthly countywide median sold price, based on Bright MLS closed sales, for Key Metrics and the homebuying scenario
+- [Realtor.com market data](https://www.realtor.com/local/market/maryland/howard-county): separate community listing-price snapshot and same-definition county reference; not updated by the HCAR refresh
 - [Howard County Housing Commission](https://www.howardcountymd.gov/housing-community-development) — payment standards and Moderate Income Housing Unit program data
 
 The Methodology section at the bottom of the dashboard documents how each figure is calculated and every caveat that applies.
+
+## Monthly market refresh
+
+Read the latest completed-month overall median sold price from HCAR's Detailed Report, and cross-check the same month and value against its Local Market Insight Report. Discover links from the Monthly Stats page; do not guess filenames, which have varied. Image-only PDFs need visual reading or OCR. Do not use average price, year-to-date median, or a property-type subset.
+
+Run `python3 rate_check.py --price <verified_price> --hcar-evidence <evidence.json>`. The evidence file records the metric, geography, period, source, both HCAR report URLs, and matching values. See `hcar-evidence-2026-08.json` for a verified example. The checker blocks missing or inconsistent evidence and never compares sold prices against Realtor.com listing prices. If HCAR cannot be verified, omit both price arguments for a rate-only check on an already-migrated dashboard.
+
+The checker controls the 0.25-percentage-point mortgage threshold measured against the displayed rate. Use every printed calculation verbatim, including the cost chart dataset, its accessible description, table, prose, loan, down payment, closing costs, and cash to close. Never pick the county price by its frequency in the HTML: the stable `county-median-sold-price` element identifies it separately from community and MIHU values.
+
+Changing from Realtor.com listing price to HCAR sold price is a source/definition change, not a measured market decline. Preserve historical records with their original source. A report-month-only change does not advance the “Data as of” badge. The published HCAR period must match the report actually supporting the displayed price.
+
+Local preview changes do not authorize publication. After approval, publish and synchronize the GitHub mirror, offline copy, and newly dated archives together; preserve earlier backups.
 
 ---
 

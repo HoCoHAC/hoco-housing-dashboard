@@ -298,7 +298,7 @@
     </div>
     <div class="header-meta">
       <h1 class="header-title">Housing Dashboard</h1>
-      <div class="updated-badge">Data as of <strong>September 5, 2026</strong></div>
+      <div class="updated-badge">Data as of <strong>September 15, 2026</strong></div>
     </div>
   </div>
 </header>
@@ -330,13 +330,13 @@
   <!-- ============ KEY METRICS ============ -->
   <section class="section" id="key-metrics">
     <h2 class="section-title">Key Metrics at a Glance</h2>
-    <p class="section-sub">The median listing price for a Howard County home is <strong>$657,475</strong>, and a two-bedroom apartment runs <strong>$1,947&ndash;$3,069</strong> a month.</p>
+    <p class="section-sub">The median sold price for a Howard County home was <strong>$639,000</strong> in August 2026, and a two-bedroom apartment runs <strong>$1,947&ndash;$3,069</strong> a month.</p>
 
     <div class="kpi-grid">
       <div class="kpi">
-        <div class="label">For Sale: Median Listing Price</div>
-        <div class="value tnum">$657,475</div>
-        <div class="sub">$260 per square foot &middot; Realtor.com, September 2026</div>
+        <div class="label">For Sale: Median Sold Price</div>
+        <div class="value tnum" id="county-median-sold-price" data-source="hcar" data-period="2026-08">$639,000</div>
+        <div class="sub">HCAR / Bright MLS &middot; August 2026 closed sales</div>
       </div>
       <div class="kpi">
         <div class="label">For Rent: 2BR Monthly Range</div>
@@ -350,30 +350,30 @@
   <!-- ============ HOMEBUYING ============ -->
   <section class="section" id="homebuying">
     <h2 class="section-title">What It Takes to Buy the Median-Priced Home</h2>
-    <p class="section-sub">A single 10% down-payment scenario, using the current median listing price and the latest Freddie Mac 30-year fixed rate.</p>
+    <p class="section-sub">A single 10% down-payment scenario, using HCAR's August 2026 median sold price and the displayed Freddie Mac 30-year fixed rate.</p>
 
     <div class="buy-layout">
       <div>
         <div class="figure-block">
           <div class="figure-label">Down payment of 10%</div>
-          <div class="figure-value tnum">$65,748</div>
+          <div class="figure-value tnum">$63,900</div>
         </div>
         <div class="figure-block">
           <div class="figure-label">Annual income required</div>
-          <div class="figure-value hero-num tnum">$204,850</div>
-          <p class="figure-note">to afford the median Howard County listed home &mdash; assuming 10% down, a 30-year fixed mortgage at 6.66%, PMI of ~0.55% on the loan, and housing costs at 28% of gross income.</p>
+          <div class="figure-value hero-num tnum">$199,300</div>
+          <p class="figure-note">to afford a home at Howard County's median sold price &mdash; assuming 10% down, a 30-year fixed mortgage at 6.66%, PMI of ~0.55% on the loan, and housing costs at 28% of gross income.</p>
         </div>
       </div>
       <div>
-        <div class="chart-wrap sm"><canvas id="chartBuyDonut" role="img" aria-label="Donut chart of monthly housing cost components: principal and interest $3,803, property tax $556, homeowners insurance $150, and PMI $271."></canvas></div>
+        <div class="chart-wrap sm"><canvas id="chartBuyDonut" role="img" aria-label="Donut chart of monthly housing cost components: principal and interest $3,696, property tax $540, homeowners insurance $150, and PMI $264."></canvas></div>
         <table class="cost-table tnum">
           <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Monthly housing cost breakdown</caption>
           <tbody>
-            <tr><td>Principal &amp; interest</td><td>$3,803</td></tr>
-            <tr><td>Property tax (1.014%)</td><td>$556</td></tr>
+            <tr><td>Principal &amp; interest</td><td>$3,696</td></tr>
+            <tr><td>Property tax (1.014%)</td><td>$540</td></tr>
             <tr><td>Homeowners insurance</td><td>$150</td></tr>
-            <tr><td>PMI (~0.55% of loan)</td><td>$271</td></tr>
-            <tr class="total"><td>Total monthly housing cost</td><td>$4,780</td></tr>
+            <tr><td>PMI (~0.55% of loan)</td><td>$264</td></tr>
+            <tr class="total"><td>Total monthly housing cost</td><td>$4,650</td></tr>
           </tbody>
         </table>
       </div>
@@ -381,7 +381,7 @@
 
     <div class="callout navy">
       <span class="ico" aria-hidden="true">&#9432;</span>
-      <span>Cash needed to close is roughly <strong>$85,472</strong> &mdash; a $65,748 down payment plus about $19,724 in closing costs (title, transfer, recordation, and lender fees at ~3% of price).</span>
+      <span>Cash needed to close is roughly <strong>$83,070</strong> &mdash; a $63,900 down payment plus about $19,170 in closing costs (title, transfer, recordation, and lender fees at ~3% of price).</span>
     </div>
 
     <div class="callout">
@@ -454,7 +454,7 @@
     <h3>Median Listing Prices by Community</h3>
     <p class="subcap">Comparing prices across Howard County neighborhoods</p>
     <div class="panel">
-      <div class="chart-wrap tall"><canvas id="chartCommPrice" role="img" aria-label="Horizontal bar chart of median listing price by Howard County community, compared with the countywide median."></canvas></div>
+      <div class="chart-wrap tall"><canvas id="chartCommPrice" role="img" aria-label="Horizontal bar chart of Realtor.com median listing prices by Howard County community, retrieved July 31, 2026, compared with its countywide median listing price of $657,475 retrieved September 5, 2026. These asking prices are separate from the HCAR sold-price metric."></canvas></div>
       <p class="src-line" id="srcCommPrice"></p>
     </div>
 
@@ -774,12 +774,12 @@
     <div class="grid-2">
       <div>
         <div class="meth-item">
-          <h4>Median listing price, not median sale price</h4>
-          <p>The homebuying section uses the Realtor.com median <em>listing</em> price for Howard County, which reflects what is currently on the market rather than what has closed. It is refreshed monthly.</p>
+          <h4>Median sold price, not asking price</h4>
+          <p>Key Metrics and homebuying use the Howard County Association of REALTORS&reg; (HCAR) monthly median <em>sold</em> price, based on Bright MLS closed sales across the report's property types. This is the overall monthly median, not the average or year-to-date price. HCAR replaced Realtor.com for these sections on September 15, 2026; the switch from asking prices to closed-sale prices is a change in definition, not a measured market decline. The By Community chart retains its separately dated Realtor.com listing-price series and county reference, not HCAR sold prices.</p>
         </div>
         <div class="meth-item">
           <h4>Mortgage cost assumptions</h4>
-          <p>10% down on a 30-year fixed loan at the latest Freddie Mac PMMS rate; property tax at the 1.014% effective combined county and state rate; homeowners insurance at $150/month; PMI at ~0.55% of the loan annually. Income required is the total monthly cost at a 28% front-end debt-to-income ratio.</p>
+          <p>10% down on a 30-year fixed loan at the displayed Freddie Mac PMMS rate, subject to the refresh threshold below; property tax at the 1.014% effective combined county and state rate; homeowners insurance at $150/month; PMI at ~0.55% of the loan annually. Income required is the total monthly cost at a 28% front-end debt-to-income ratio.</p>
         </div>
         <div class="meth-item">
           <h4>The 198% disability figure is ours, not TAC's</h4>
@@ -821,7 +821,7 @@
         </div>
         <div class="meth-item">
           <h4>Refresh cadence</h4>
-          <p>The median listing price and mortgage rate are reviewed on the 5th of each month. The listing price is updated whenever it changes; the mortgage rate is updated when it has moved a quarter percentage point or more from the rate shown, so that the homebuying figures reflect meaningful shifts rather than week-to-week noise. The &ldquo;data as of&rdquo; date advances only when a figure changes. HCHC payment standards are reviewed each January, when new standards take effect. The point-in-time homeless count is checked every month and updated whenever HUD publishes a newer one; HUD's release timing is irregular &mdash; the 2025 count did not appear until May 2026 &mdash; so that check is not tied to a season. Census, CHAS, and Rental Housing Survey figures update when new releases are published.</p>
+          <p>The HCAR median sold price and mortgage rate are reviewed on the 5th of each month. The latest available completed-month HCAR report is used; if a newer report has not yet appeared, the existing price and report month remain. The sold price is updated whenever it changes and is verified against HCAR's detailed and insight reports; the mortgage rate is updated when it has moved a quarter percentage point or more from the rate shown, so that the homebuying figures reflect meaningful shifts rather than week-to-week noise. The &ldquo;data as of&rdquo; date advances only when a figure changes. Community listing prices and their county reference are a separate, dated snapshot and do not change with the HCAR refresh. HCHC payment standards are reviewed each January, when new standards take effect. The point-in-time homeless count is checked every month and updated whenever HUD publishes a newer one; HUD's release timing is irregular &mdash; the 2025 count did not appear until May 2026 &mdash; so that check is not tied to a season. Census, CHAS, and Rental Housing Survey figures update when new releases are published.</p>
         </div>
         <div class="meth-item">
           <h4>Static figures</h4>
@@ -840,7 +840,7 @@
     <div class="src-group">
       <h3>Key Metrics at a Glance</h3>
       <ol>
-      <li>Realtor.com, <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County, MD market trends</a> &mdash; median listing price and price per square foot, retrieved September 5, 2026.</li>
+      <li>Howard County Association of REALTORS&reg; (HCAR), <a href="https://www.hcar.org/clientuploads/PDF%20Files/Housing_Stats/2026_Housing_Stats/August/August_2026_Detailed_Report_(1).pdf" target="_blank" rel="noopener">August 2026 Detailed Report</a> &mdash; overall median sold price $639,000; 329 closed sales. Data: Bright MLS; statistics calculated September 4, 2026. Verified against the <a href="https://www.hcar.org/clientuploads/PDF%20Files/Housing_Stats/2026_Housing_Stats/August/August_2026_Local_Market_Insight_Report.pdf" target="_blank" rel="noopener">August 2026 Local Market Insight Report</a>. Retrieved September 15, 2026. New editions: <a href="https://www.hcar.org/pages/monthly-stats/" target="_blank" rel="noopener">HCAR Monthly Stats</a>.</li>
       <li>Howard County Housing Commission, <a href="https://www.howardcountyhousing.org" target="_blank" rel="noopener">Housing Choice Voucher payment standards</a> &mdash; effective January 1, 2026.</li>
       </ol>
     </div>
@@ -848,7 +848,7 @@
     <div class="src-group">
       <h3>What It Takes to Buy the Median-Priced Home</h3>
       <ol>
-      <li>Home price: Realtor.com <a href="https://www.realtor.com/realestateandhomes-search/Howard-County_MD/overview" target="_blank" rel="noopener">Howard County median listing price</a>, $657,475 (retrieved September 5, 2026). Loan amount $591,727 after 10% down.</li>
+      <li>Home price: HCAR / Bright MLS, <a href="https://www.hcar.org/clientuploads/PDF%20Files/Housing_Stats/2026_Housing_Stats/August/August_2026_Detailed_Report_(1).pdf" target="_blank" rel="noopener">August 2026 median sold price</a>, $639,000 (retrieved September 15, 2026). Loan amount $575,100 after 10% down.</li>
       <li>Rate: Freddie Mac <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">PMMS</a> 30-year fixed, 6.66% (week ending July 30, 2026), amortized over 360 months.</li>
       <li>Property tax: 1.014% effective combined Howard County and State of Maryland rate, per <a href="https://www.howardcountymd.gov/finance/tax-rates" target="_blank" rel="noopener">Howard County Department of Finance</a>.</li>
       <li>Insurance: $150/month, typical Howard County estimate. PMI: ~0.55% of loan annually, required with less than 20% down.</li>
@@ -963,7 +963,7 @@
 <footer class="site-footer">
   <div>
     <strong style="color:#fff">Housing Affordability Coalition</strong> &middot; Howard County, Maryland<br>
-    Data compiled and maintained by the Coalition. Market data as of September 5, 2026.
+    Data compiled and maintained by the Coalition. Market data as of September 15, 2026.
   </div>
 </footer>
 
@@ -1069,7 +1069,7 @@ new Chart(document.getElementById('chartBuyDonut'), {
   data: {
     labels: ['Principal & Interest', 'Property Tax', 'Insurance', 'PMI'],
     datasets: [{
-      data: [3962, 579, 150, 283],
+      data: [3696, 540, 150, 264],
       backgroundColor: [C.coral, C.blue, C.gold, C.navy],
       borderColor: '#fff',
       borderWidth: 2
@@ -1365,12 +1365,12 @@ new Chart(document.getElementById('chartDisEarn'), {
 /* ============================================================
    2. Community charts  (data injected below)
    ============================================================ */
-/* Realtor.com place-level market pages, retrieved July 31, 2026.
-   County reference is Realtor.com's own countywide median listing price for
-   the same series, so the bars and the reference line share a basis. */
+/* Separate Realtor.com listing-price snapshot; not the HCAR sold-price KPI.
+   Place values retrieved July 31, 2026; county reference September 5, 2026.
+   Keep this same-definition reference independent of the HCAR refresh. */
 const COMMUNITY_PRICE = {
   median: 657475,
-  note: 'Source: Realtor.com, Howard County place-level market trends, retrieved July 31, 2026. County median listing price $657,475. Reporting months are not stated for every community, so community values may not all reflect the same month.',
+  note: 'Source: Realtor.com listing prices. Community values retrieved July 31, 2026; county median listing price $657,475 retrieved September 5, 2026. These asking prices are separate from the HCAR sold-price headline. Reporting months are not stated for every community, so the values may not reflect the same month.',
   rows: [
     { name: 'Elkridge',       value: 494450  },
     { name: 'Columbia',       value: 495000  },
@@ -1402,9 +1402,9 @@ const COMMUNITY_OWN = {
 };
 
 document.getElementById('commSources').innerHTML = [
-  '<li>Realtor.com &mdash; place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475 at $260 per square foot.</li>',
+  '<li>Realtor.com &mdash; place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>, retrieved July 31, 2026. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475, retrieved September 5, 2026.</li>',
   '<li>U.S. Census Bureau &mdash; <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places.</li>',
-  '<li>The county reference line uses the same $657,475 median listing price shown in the Key Metrics and homebuying sections above, so all three are on one consistent Realtor.com series.</li>'
+  '<li>The county reference line and community bars both use Realtor.com listing prices. They are a separately dated snapshot, not the HCAR median sold price used in Key Metrics and homebuying; do not interpret the difference as a price change or a local sale-to-list ratio.</li>'
 ].join('');
 
 if (COMMUNITY_PRICE) {
