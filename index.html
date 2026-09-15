@@ -452,17 +452,15 @@
     <p class="section-sub">Howard County is not one housing market. Prices and ownership rates vary sharply across its communities.</p>
 
     <h3>Median Listing Prices by Community</h3>
-    <p class="subcap">Comparing prices across Howard County neighborhoods</p>
+    <p class="subcap">Asking prices across Howard County communities, separate from the HCAR sold-price headline</p>
     <div class="panel">
       <div class="chart-wrap tall"><canvas id="chartCommPrice" role="img" aria-label="Horizontal bar chart of Realtor.com median listing prices by Howard County community, retrieved July 31, 2026, compared with its countywide median listing price of $657,475 retrieved September 5, 2026. These asking prices are separate from the HCAR sold-price metric."></canvas></div>
-      <p class="src-line" id="srcCommPrice"></p>
     </div>
 
     <h3>Homeownership Rate by Community</h3>
-    <p class="subcap">Share of occupied homes that are owner-occupied</p>
+    <p class="subcap">Share of occupied homes that are owner-occupied, by Census-designated place</p>
     <div class="panel">
       <div class="chart-wrap md"><canvas id="chartCommOwn" role="img" aria-label="Horizontal bar chart of homeownership rate by Howard County community, compared with the countywide average."></canvas></div>
-      <p class="src-line" id="srcCommOwn"></p>
     </div>
 
   </section>
@@ -1370,7 +1368,6 @@ new Chart(document.getElementById('chartDisEarn'), {
    Keep this same-definition reference independent of the HCAR refresh. */
 const COMMUNITY_PRICE = {
   median: 657475,
-  note: 'Source: Realtor.com listing prices. Community values retrieved July 31, 2026; county median listing price $657,475 retrieved September 5, 2026. These asking prices are separate from the HCAR sold-price headline. Reporting months are not stated for every community, so the values may not reflect the same month.',
   rows: [
     { name: 'Elkridge',       value: 494450  },
     { name: 'Columbia',       value: 495000  },
@@ -1388,7 +1385,6 @@ const COMMUNITY_PRICE = {
 /* ACS 2020–2024 5-Year Estimates, Table B25003, Census Designated Places. */
 const COMMUNITY_OWN = {
   average: 71.5,
-  note: 'Source: U.S. Census Bureau, ACS 2020–2024 5-Year Estimates, Table B25003, Census Designated Places. County average 71.5%. Clarksville and West Friendship have no Census place record and cannot be charted; their ZIP-code areas (21029 and 21794) run 93.6% and 99.5%, but cover broader rural territory. Lisbon rests on just 29 occupied units, so read it as near-universal owner occupancy.',
   rows: [
     { name: 'Lisbon',        value: 100.0 },
     { name: 'Scaggsville',   value: 92.3  },
@@ -1402,9 +1398,10 @@ const COMMUNITY_OWN = {
 };
 
 document.getElementById('commSources').innerHTML = [
-  '<li>Realtor.com &mdash; place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>, retrieved July 31, 2026. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475, retrieved September 5, 2026.</li>',
-  '<li>U.S. Census Bureau &mdash; <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places.</li>',
-  '<li>The county reference line and community bars both use Realtor.com listing prices. They are a separately dated snapshot, not the HCAR median sold price used in Key Metrics and homebuying; do not interpret the difference as a price change or a local sale-to-list ratio.</li>'
+  '<li>Median listing prices: Realtor.com place-level market trend pages for each community, e.g. <a href="https://www.realtor.com/local/market/maryland/howard-county/columbia" target="_blank" rel="noopener">Columbia</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/ellicott-city" target="_blank" rel="noopener">Ellicott City</a>, <a href="https://www.realtor.com/local/market/maryland/howard-county/clarksville" target="_blank" rel="noopener">Clarksville</a>, retrieved July 31, 2026. County reference: <a href="https://www.realtor.com/local/market/maryland/howard-county" target="_blank" rel="noopener">Howard County</a>, median listing price $657,475, retrieved September 5, 2026.</li>',
+  '<li>Listing-price comparability: reporting months are not stated for every community, so the values may not reflect the same month. The county reference line and community bars both use Realtor.com listing prices. They are a separately dated snapshot, not the HCAR median sold price used in Key Metrics and homebuying; do not interpret the difference as a price change or a local sale-to-list ratio.</li>',
+  '<li>Homeownership rates: U.S. Census Bureau, <a href="https://data.census.gov/table?q=B25003&g=050XX00US24027" target="_blank" rel="noopener">ACS 2020&ndash;2024 5-Year Estimates, Table B25003</a> (tenure), for Howard County and its Census Designated Places. County average: 71.5%.</li>',
+  '<li>Homeownership geography and sample size: Clarksville and West Friendship have no Census place record and cannot be charted; their ZIP-code areas (21029 and 21794) run 93.6% and 99.5%, but cover broader rural territory. Lisbon rests on just 29 occupied units, so read it as near-universal owner occupancy.</li>'
 ].join('');
 
 if (COMMUNITY_PRICE) {
@@ -1441,7 +1438,6 @@ if (COMMUNITY_PRICE) {
       endLabelPlugin({ key: 'P', datasetIndex: 0, text: i => usd(d.rows[i].value), color: () => C.muted })
     ]
   });
-  document.getElementById('srcCommPrice').textContent = d.note;
 }
 
 if (COMMUNITY_OWN) {
@@ -1478,7 +1474,6 @@ if (COMMUNITY_OWN) {
       endLabelPlugin({ key: 'O', datasetIndex: 0, text: i => Math.round(d.rows[i].value) + '%', color: () => C.muted })
     ]
   });
-  document.getElementById('srcCommOwn').textContent = d.note;
 }
 
 /* ============================================================
