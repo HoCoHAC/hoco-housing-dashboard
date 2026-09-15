@@ -100,6 +100,11 @@
     "effective_rate": 6.66,
     "effective_price": 639000.0,
     "action": "update",
-    "publication_status": "preview_pending_approval"
+    "publication_status": "published",
+    "publication_date": "2026-09-15",
+    "publication_url": "https://hoco-housing-affordability-coalition.pplx.app",
+    "drive_pdf_id": "1WIxz3j8DrJTZYiGDa35mUgZZhAeq5f6i",
+    "drive_zip_id": "1liP8xoPK2PRqCYEIR81qROR0oQfmhTym",
+    "github_commit": "08dcd7f"
   }
 ]
